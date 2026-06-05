@@ -5463,7 +5463,7 @@
     </div>
   </div>
 
-  <script>
+<script>
     // ========== VIDEO FULLSCREEN ==========
     function toggleFullscreen(videoId) {
       const video = document.getElementById(videoId);
@@ -5891,7 +5891,7 @@
       trx: {
         name: 'TRX',
         network: 'TRC20',
-        address: 'TUy2ot8bRRRvTKjddhhAEiDtex88m18aB9',
+        address: '0x9CF543BbB86E72DD96782848723885aa631C4e03',
         color: '#e4002b',
         bgColor: '#e4002b',
         logo: 'https://pfst.cf2.poecdn.net/base/image/82bdd18090d9cd859ac95189eea1e0c257748bc7f315f913063cc01e2a1a2f9e?w=374&h=380'
@@ -6016,26 +6016,100 @@
       'TON': { color: '#0088cc', icon: 'T' }
     };
 
-    // Crypto exchange rates (MGA to Crypto) - Approximate rates
-    const cryptoRates = {
-      'USDT': 4650,      // 1 USDT = 4650 MGA
-      'BNB': 4061254,    // 1 BNB = 4,061,254 MGA
-      'TRX': 1350,       // 1 TRX = 1350 MGA
-      'LTC': 383632,     // 1 LTC = 383,632 MGA
-      'POLYGON': 600,    // 1 POL = 600 MGA
-      'BCH': 2789125,    // 1 BCH = 2,789,125 MGA
-      'SOL': 613006,     // 1 SOL = 613,006 MGA
-      'SUI': 7920,       // 1 SUI = 7,920 MGA
-      'ARB': 2100,       // 1 ARB = 2100 MGA
-      'XRP': 9351,       // 1 XRP = 9,351 MGA
-      'TON': 8550,       // 1 TON = 8,550 MGA
-      'DOGECOIN': 700    // 1 DOGE = 700 MGA
+    // ========== TAUX CRYPTO EN TEMPS RÉEL (API Anthropic) ==========
+    // Taux de base au 05/06/2026 — mis à jour automatiquement via API
+    const cryptoRatesFallback = {
+      'USDT': 4620, 'BNB': 2746867, 'TRX': 1532, 'LTC': 375144,
+      'POLYGON': 993, 'BCH': 2148300, 'SOL': 686070, 'SUI': 14414,
+      'ARB': 1802, 'XRP': 10603, 'TON': 14692, 'DOGECOIN': 781
     };
 
-    // Function to convert MGA to crypto
+    let cryptoRates = { ...cryptoRatesFallback };
+    let ratesLastUpdated = null;
+    const USD_TO_MGA = 4620;
+
+    async function fetchLiveRates() {
+      try {
+        const prompt = `Give me the current USD prices for these cryptocurrencies as a JSON object only, no explanation, no markdown, just raw JSON:
+{"USDT":1,"BNB":0,"TRX":0,"LTC":0,"POLYGON":0,"BCH":0,"SOL":0,"SUI":0,"ARB":0,"XRP":0,"TON":0,"DOGECOIN":0}
+Fill in the current market prices in USD for each. Return ONLY the JSON object.`;
+
+        const res = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: "claude-haiku-4-5-20251001",
+            max_tokens: 300,
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+
+        if (!res.ok) throw new Error('API error ' + res.status);
+        const data = await res.json();
+        const text = data.content[0].text.trim();
+
+        // Parse JSON from response
+        const jsonMatch = text.match(/\{[^}]+\}/);
+        if (!jsonMatch) throw new Error('No JSON found');
+        const prices = JSON.parse(jsonMatch[0]);
+
+        // Convert USD → MGA
+        let updated = 0;
+        for (const [sym, usdPrice] of Object.entries(prices)) {
+          if (sym in cryptoRatesFallback && usdPrice > 0) {
+            cryptoRates[sym] = Math.round(parseFloat(usdPrice) * USD_TO_MGA);
+            updated++;
+          }
+        }
+        if (updated < 5) throw new Error('Not enough prices returned');
+
+        ratesLastUpdated = new Date();
+        updateRatesBadge(true);
+        console.log('✅ Taux mis à jour via API:', cryptoRates);
+
+      } catch (e) {
+        console.log('Taux de base utilisés:', e.message);
+        updateRatesBadge(false);
+      }
+    }
+
+    function updateRatesBadge(success) {
+      const badges = document.querySelectorAll('.rates-live-badge');
+      badges.forEach(b => {
+        if (success && ratesLastUpdated) {
+          const h = ratesLastUpdated.getHours().toString().padStart(2,'0');
+          const m = ratesLastUpdated.getMinutes().toString().padStart(2,'0');
+          b.textContent = `🟢 Taux en direct ${h}:${m}`;
+          b.style.color = '#10b981';
+        } else {
+          b.textContent = '🟡 Taux du jour (05/06/26)';
+          b.style.color = '#f59e0b';
+        }
+      });
+    }
+
+    // Afficher les taux de base immédiatement, puis tenter la mise à jour
+    updateRatesBadge(false);
+    fetchLiveRates();
+    setInterval(fetchLiveRates, 10 * 60 * 1000);
+
+    // Marge commerciale : +7% sur dépôt, -7% sur retrait
+    const DEPOT_MARGIN = 1.07;   // taux dépôt majoré → client reçoit moins de crypto
+    const RETRAIT_MARGIN = 0.93; // taux retrait minoré → client reçoit moins d'Ariary
+
+    function getDepotRate(crypto) {
+      const base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4600;
+      return base * DEPOT_MARGIN;
+    }
+
+    function getRetraitRate(crypto) {
+      const base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4600;
+      return base * RETRAIT_MARGIN;
+    }
+
+    // Function to convert MGA to crypto (dépôt — taux majoré)
     function convertMGAToCrypto(amountMGA, crypto) {
-      const rate = cryptoRates[crypto] || 4600;
-      return (amountMGA / rate).toFixed(6);
+      return (amountMGA / getDepotRate(crypto)).toFixed(6);
     }
 
     // Current depot state
@@ -6120,11 +6194,16 @@
           <input type="number" id="depotAmountAriary" placeholder="Ex: 50000" min="4000" style="width: 100%; padding: 14px 16px; font-size: 16px; font-family: 'JetBrains Mono', monospace; border: 2px solid var(--border); border-radius: 12px; background: var(--glass-1); color: var(--text-primary); outline: none; transition: all 0.3s ease;" onfocus="this.style.borderColor='#10b981'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.2)';" onblur="this.style.borderColor=''; this.style.boxShadow='';">
           <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">⚠️ Minimum: <strong style="color: #f59e0b;">4 000 MGA</strong></p>
 
+          <!-- Badge taux live -->
+          <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 4px;">
+            <span class="rates-live-badge" style="font-size: 11px; font-weight: 600; color: #10b981;">🟢 Chargement des taux...</span>
+          </div>
+
           <!-- Conversion Display -->
           <div id="conversionDisplay" style="display: none; margin-top: 12px; padding: 14px 16px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border: 2px solid #10b981; border-radius: 12px; text-align: center;">
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">💱 Conversion estimée</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">💱 Conversion en temps réel</p>
             <p style="font-size: 20px; font-weight: 800; color: #10b981; font-family: 'JetBrains Mono', monospace;" id="convertedAmount">0.000000 ${crypto}</p>
-            <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">Taux: 1 ${crypto} ≈ ${(cryptoRates[crypto] || 4600).toLocaleString()} MGA</p>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px;" id="depotRateDisplay">Taux: 1 ${crypto} ≈ ${Math.round(getDepotRate(crypto)).toLocaleString()} MGA</p>
           </div>
         </div>
 
@@ -6229,10 +6308,17 @@
       const convertedAmountEl = document.getElementById('convertedAmount');
 
       if (amountInput) {
+        // Mettre à jour l'affichage du taux initial
+        const depotRateEl = document.getElementById('depotRateDisplay');
+        if (depotRateEl) depotRateEl.textContent = `Taux: 1 ${crypto} ≈ ${Math.round(getDepotRate(crypto)).toLocaleString()} MGA`;
+
         amountInput.addEventListener('input', () => {
           const amount = parseFloat(amountInput.value) || 0;
+          const liveRate = getDepotRate(crypto);
+          // Mettre à jour le taux affiché en temps réel
+          if (depotRateEl) depotRateEl.textContent = `Taux: 1 ${crypto} ≈ ${Math.round(liveRate).toLocaleString()} MGA`;
           if (amount > 0) {
-            const converted = convertMGAToCrypto(amount, crypto);
+            const converted = (amount / liveRate).toFixed(6);
             convertedAmountEl.textContent = converted + ' ' + crypto;
             conversionDisplay.style.display = 'block';
           } else {
@@ -6591,8 +6677,8 @@
       'Site Web': { color: '#6366f1', icon: '🌐', logo: null, addresses: {
         'BNB': '0x29F727a8f4eed7D2D9D6b3fc11cD14575D2De50B',
         'LTC': 'ltc1qll0vxjx8j8vp8weq0jy9y722c3jzh8cgpx2twz',
-        'TRX': 'TUy2ot8bRRRvTKjddhhAEiDtex88m18aB9',
-        'USDT': 'TUy2ot8bRRRvTKjddhhAEiDtex88m18aB9',
+        'TRX': '0x9CF543BbB86E72DD96782848723885aa631C4e03',
+        'USDT': '0x9CF543BbB86E72DD96782848723885aa631C4e03',
         'DOGE': 'DFJYfqLq9gAmwuaxA2ipZKUGAAj2qd8qV1',
         'POLYGON': '0x29F727a8f4eed7D2D9D6b3fc11cD14575D2De50B',
         'SOL': '9Ej7ytE5qXSojW8TzJe7aUQ7L95P6TUE9WpecBP1E1pe',
@@ -6605,8 +6691,8 @@
       'Trust Wallet': { color: '#0500ff', icon: 'T', logo: 'https://pfst.cf2.poecdn.net/base/image/2f783c52b6a9a9096ee97b21d7cece1ccc226f8311ac5881f809b57900a62db4?w=151&h=170', addresses: {
         'BNB': '0x29F727a8f4eed7D2D9D6b3fc11cD14575D2De50B',
         'LTC': 'ltc1qll0vxjx8j8vp8weq0jy9y722c3jzh8cgpx2twz',
-        'TRX': 'TUy2ot8bRRRvTKjddhhAEiDtex88m18aB9',
-        'USDT': 'TUy2ot8bRRRvTKjddhhAEiDtex88m18aB9',
+        'TRX': '0x9CF543BbB86E72DD96782848723885aa631C4e03',
+        'USDT': '0x9CF543BbB86E72DD96782848723885aa631C4e03',
         'DOGE': 'DFJYfqLq9gAmwuaxA2ipZKUGAAj2qd8qV1',
         'POLYGON': '0x29F727a8f4eed7D2D9D6b3fc11cD14575D2De50B',
         'SOL': '9Ej7ytE5qXSojW8TzJe7aUQ7L95P6TUE9WpecBP1E1pe',
@@ -6659,7 +6745,7 @@
     function showRetraitForm(crypto) {
       const style = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
       currentRetraitCrypto = crypto;
-      const rate = cryptoRates[crypto] || 4650;
+      const rate = getRetraitRate(crypto);
 
       const content = `
         <div style="margin-bottom: 24px;">
@@ -6679,13 +6765,18 @@
           </div>
         </div>
 
+        <!-- Badge taux live retrait -->
+        <div style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 6px;">
+          <span class="rates-live-badge" style="font-size: 11px; font-weight: 600; color: #10b981;">🟢 Chargement des taux...</span>
+        </div>
+
         <!-- Ariary Conversion Display -->
         <div id="retraitConversionZone" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1)); border: 2px solid rgba(245, 158, 11, 0.3); border-radius: 14px; padding: 16px; margin-bottom: 16px; display: none;">
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <span style="font-size: 13px; color: var(--text-muted);">💵 Équivalent en Ariary:</span>
             <span id="retraitConversionValue" style="font-size: 18px; font-weight: 800; color: #f59e0b; font-family: 'JetBrains Mono', monospace;">0 MGA</span>
           </div>
-          <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px; text-align: center;">Taux: 1 ${crypto} = ${rate.toLocaleString()} MGA</p>
+          <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px; text-align: center;" id="retraitRateDisplay">Taux: 1 ${crypto} = ${Math.round(getRetraitRate(crypto)).toLocaleString()} MGA</p>
         </div>
 
         <!-- Wallet Selection Button -->
@@ -6723,15 +6814,18 @@
       $('retraitModal').classList.remove('open');
       $('retraitDetailModal').classList.add('open');
 
-      // Setup conversion calculation
+      // Setup conversion calculation avec taux live
       const cryptoInput = $('retraitCryptoAmount');
       const conversionZone = $('retraitConversionZone');
       const conversionValue = $('retraitConversionValue');
+      const rateDisplayEl = $('retraitRateDisplay');
 
       cryptoInput.addEventListener('input', () => {
         const amount = parseFloat(cryptoInput.value) || 0;
+        const liveRate = getRetraitRate(crypto);
+        if (rateDisplayEl) rateDisplayEl.textContent = `Taux: 1 ${crypto} = ${Math.round(liveRate).toLocaleString()} MGA`;
         if (amount > 0) {
-          const ariaryAmount = amount * rate;
+          const ariaryAmount = Math.round(amount * liveRate);
           conversionValue.textContent = ariaryAmount.toLocaleString() + ' MGA';
           conversionZone.style.display = 'block';
         } else {
@@ -6881,7 +6975,7 @@
             confirmBtn.addEventListener('click', () => {
               if (!selectedWallet) return;
               const amount = parseFloat($('retraitCryptoAmount').value) || 0;
-              const rate = cryptoRates[currentRetraitCrypto] || 4650;
+              const rate = getRetraitRate(currentRetraitCrypto);
               const ariaryAmount = amount * rate;
               const phoneNumber = $('retraitPhoneNumber') ? $('retraitPhoneNumber').value.trim() : '';
               const simName = $('retraitSimName') ? $('retraitSimName').value.trim() : '';
@@ -9291,33 +9385,6 @@
     initAdaptiveVideoPlayback();
 
   </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
