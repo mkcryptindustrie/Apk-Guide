@@ -6427,8 +6427,10 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
         var depotRate = getDepotRate(currentDepotCrypto);
         if (depotRateEl) depotRateEl.textContent = 'Taux: 1 ' + currentDepotCrypto + ' ≈ ' + Math.round(depotRate).toLocaleString() + ' MGA';
         var depotAmt = parseFloat(depotAmountInput.value) || 0;
-        if (depotAmt > 0 && convertedAmountEl) {
-          convertedAmountEl.textContent = (depotAmt / depotRate).toFixed(6) + ' ' + currentDepotCrypto;
+        if (depotAmt >= 4000 && convertedAmountEl) {
+          var rawD = depotAmt / depotRate;
+          var decD = rawD >= 100 ? 2 : rawD >= 1 ? 4 : 6;
+          convertedAmountEl.textContent = rawD.toFixed(decD) + ' ' + currentDepotCrypto;
           if (conversionDisplay) conversionDisplay.style.display = 'block';
         }
       }
@@ -6460,8 +6462,78 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     setInterval(refreshOpenConversions, 60 * 1000);
 
     // ── Marge commerciale : +7% sur dépôt, -7% sur retrait ──────────────────────
-    const DEPOT_MARGIN = 1.07;   // taux dépôt majoré → client reçoit moins de crypto
-    const RETRAIT_MARGIN = 0.93; // taux retrait minoré → client reçoit moins d'Ariary
+    const DEPOT_MARGIN = 1.10;   // taux dépôt majoré +10% → client reçoit moins de crypto
+    const RETRAIT_MARGIN = 0.90; // taux retrait minoré -10% → client reçoit moins d'Ariary
+
+    // ── Frais réseau MVX Trade / marché 2026 (en crypto natif) ──────────────────
+    const binanceFeesByCrypto = {
+      "USDT": {
+            "TRC20": 1.0,
+            "POL-(POLYGON)": 0.5,
+            "BSC (BNB Smart Chain BEP20)": 0.5,
+            "ARB-(ARBITRUM)": 0.5,
+            "default": 1.0
+      },
+      "BNB": {
+            "BSC (BNB Smart Chain BEP20)": 0.00001,
+            "default": 0.00001
+      },
+      "TRX": {
+            "TRC20": 1.0,
+            "default": 1.0
+      },
+      "LTC": {
+            "LTC-(Litecoin)": 0.001,
+            "default": 0.001
+      },
+      "POLYGON": {
+            "POL-(POLYGON)": 0.09,
+            "default": 0.09
+      },
+      "BCH": {
+            "BCH-(Bitcoin Cash)": 0.0001,
+            "default": 0.0001
+      },
+      "SOL": {
+            "SOL-(SOLANA)": 0.00002,
+            "default": 0.00002
+      },
+      "SUI": {
+            "SUI-(SUIcoin)": 0.005,
+            "default": 0.005
+      },
+      "ARB": {
+            "ARB-(ARBITRUM)": 0.05,
+            "default": 0.05
+      },
+      "XRP": {
+            "XRB": 0.00001,
+            "XRP": 0.00001,
+            "default": 0.00001
+      },
+      "TON": {
+            "TONCoin": 0.00104,
+            "default": 0.00104
+      },
+      "DOGECOIN": {
+            "DOGECOIN": 0.05,
+            "default": 0.05
+      }
+};
+
+    function getBinanceFee(crypto, network) {
+      var feeMap = binanceFeesByCrypto[crypto];
+      if (!feeMap) return null;
+      var fee = feeMap[network] || feeMap['default'] || null;
+      return fee;
+    }
+
+    function getBinanceFeeMGA(crypto, network) {
+      var feeCrypto = getBinanceFee(crypto, network);
+      if (!feeCrypto) return null;
+      var cryptoRateMGA = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4620;
+      return Math.round(feeCrypto * cryptoRateMGA);
+    }
 
     function getDepotRate(crypto) {
       const base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4600;
@@ -6682,14 +6754,57 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
         amountInput.addEventListener('input', () => {
           const amount = parseFloat(amountInput.value) || 0;
           const liveRate = getDepotRate(crypto);
+          const networkVal = document.getElementById('depotNetwork') ? document.getElementById('depotNetwork').value : '';
           // Mettre à jour le taux affiché en temps réel
-          if (depotRateEl) depotRateEl.textContent = `Taux: 1 ${crypto} ≈ ${Math.round(liveRate).toLocaleString()} MGA`;
-          if (amount > 0) {
-            const converted = (amount / liveRate).toFixed(6);
+          if (depotRateEl) depotRateEl.textContent = 'Taux: 1 ' + crypto + ' ≈ ' + Math.round(liveRate).toLocaleString() + ' MGA';
+          if (amount >= 4000) {
+            // Choisir le bon nombre de décimales selon la valeur
+            const rawConverted = amount / liveRate;
+            let decimals = 6;
+            if (rawConverted >= 1) decimals = 4;
+            if (rawConverted >= 100) decimals = 2;
+            const converted = rawConverted.toFixed(decimals);
             convertedAmountEl.textContent = converted + ' ' + crypto;
             conversionDisplay.style.display = 'block';
+            // Afficher les frais réseau Binance
+            const feeMGA = networkVal ? getBinanceFeeMGA(crypto, networkVal) : null;
+            const feeCrypto = networkVal ? getBinanceFee(crypto, networkVal) : null;
+            var feesEl = document.getElementById('depotNetworkFees');
+            if (!feesEl) {
+              feesEl = document.createElement('div');
+              feesEl.id = 'depotNetworkFees';
+              feesEl.style.cssText = 'margin-top:8px;padding:10px 14px;background:rgba(245,158,11,0.1);border:1.5px solid rgba(245,158,11,0.3);border-radius:10px;font-size:12px;';
+              conversionDisplay.parentNode.insertBefore(feesEl, conversionDisplay.nextSibling);
+            }
+            if (feeCrypto !== null && networkVal) {
+              feesEl.style.display = 'block';
+              feesEl.innerHTML = '';
+              var feeRow = document.createElement('div');
+              feeRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:8px;';
+              var feeLabel = document.createElement('span');
+              feeLabel.style.color = 'var(--text-muted)';
+              var shortNet = networkVal.replace('BNB Smart Chain BEP20', 'BSC').replace('Bitcoin Cash', 'BCH').replace('-(', ' ').replace(')', '').replace('-', ' ');
+              feeLabel.textContent = 'Frais reseau (' + shortNet + ') :';
+              var feeVal = document.createElement('span');
+              feeVal.style.cssText = 'font-weight:800;color:#f59e0b;font-family:JetBrains Mono,monospace;text-align:right;';
+              var feeMain = document.createElement('div');
+              var feeDisplay = feeCrypto < 0.001 ? feeCrypto.toFixed(6) : feeCrypto < 1 ? feeCrypto.toFixed(4) : feeCrypto.toFixed(2);
+              feeMain.textContent = feeDisplay + ' ' + crypto;
+              var feeSub = document.createElement('div');
+              feeSub.style.cssText = 'font-size:10px;color:var(--text-muted);';
+              feeSub.textContent = '≈ ' + (feeMGA||0).toLocaleString() + ' MGA';
+              feeVal.appendChild(feeMain);
+              feeVal.appendChild(feeSub);
+              feeRow.appendChild(feeLabel);
+              feeRow.appendChild(feeVal);
+              feesEl.appendChild(feeRow);
+            } else {
+              feesEl.style.display = 'none';
+            }
           } else {
             conversionDisplay.style.display = 'none';
+            var feesEl2 = document.getElementById('depotNetworkFees');
+            if (feesEl2) feesEl2.style.display = 'none';
           }
         });
       }
@@ -6731,6 +6846,9 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
             // Re-valider l'adresse déjà saisie si présente
             var currentAddr = document.getElementById('depotCryptoAddress');
             if (currentAddr && currentAddr.value) { checkAddressLive(currentAddr.value); }
+            // Mettre à jour les frais quand réseau change
+            var amtEl = document.getElementById('depotAmountAriary');
+            if (amtEl && parseFloat(amtEl.value) > 0) { amtEl.dispatchEvent(new Event('input')); }
             networkDropdown.style.display = 'none';
             networkBtn.style.borderColor = '#10b981';
             networkBtn.style.background = 'rgba(16, 185, 129, 0.1)';
@@ -7192,6 +7310,44 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       'DOGECOIN': 'Dogecoin'
     };
 
+    // ── Correspondance Crypto → Réseaux compatibles → Adresse ──────────────────
+    // Clé réseau = valeur data-net du sélecteur réseau retrait
+    const cryptoNetworkMap = {
+      'USDT':     ['TRC20', 'POL-(POLYGON)', 'BSC (BNB Smart Chain BEP20)', 'ARB-(ARBITRUM)'],
+      'BNB':      ['BSC (BNB Smart Chain BEP20)'],
+      'TRX':      ['TRC20'],
+      'LTC':      ['LTC-(Litecoin)'],
+      'POLYGON':  ['POL-(POLYGON)'],
+      'BCH':      ['BCH-(Bitcoin Cash)'],
+      'SOL':      ['SOL-(SOLANA)'],
+      'SUI':      ['SUI-(SUIcoin)'],
+      'ARB':      ['ARB-(ARBITRUM)'],
+      'XRP':      ['XRB', 'XRP'],
+      'TON':      ['TONCoin'],
+      'DOGECOIN': ['DOGECOIN']
+    };
+
+    // Réseau → Adresse (Site Web & Trust Wallet partagent les mêmes adresses)
+    const cryptoAddressByNetwork = {
+      'USDT': {
+        'TRC20':                        'TBJnRXRRzoriK65kEcRQFYK5yK8GKJJJ6t',
+        'POL-(POLYGON)':                '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18',
+        'BSC (BNB Smart Chain BEP20)':  '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18',
+        'ARB-(ARBITRUM)':               '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18'
+      },
+      'BNB':      { 'BSC (BNB Smart Chain BEP20)': '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18' },
+      'TRX':      { 'TRC20': 'TBJnRXRRzoriK65kEcRQFYK5yK8GKJJJ6t' },
+      'LTC':      { 'LTC-(Litecoin)': 'ltc1qqgmy4p0d75tt3xnqxmjnfvdng68a3mfjyngygv' },
+      'POLYGON':  { 'POL-(POLYGON)': '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18' },
+      'BCH':      { 'BCH-(Bitcoin Cash)': 'qq8pc49zgtu42h65tqngwpm32ss7lcclkv7xp4cem3' },
+      'SOL':      { 'SOL-(SOLANA)': '9Hr6f65u8nenJ4uDCmq7vGzKLNUkekPbLdi7wAZnZZ6p' },
+      'SUI':      { 'SUI-(SUIcoin)': '0x3f898ccaa9aaf8717eee932679c69764fadd62e3d8f3116dd585b5732cde5796' },
+      'ARB':      { 'ARB-(ARBITRUM)': '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18' },
+      'XRP':      { 'XRB': 'r3Ga983rZYQb58CEhsmpx4FnzbcERpMkQk', 'XRP': 'r3Ga983rZYQb58CEhsmpx4FnzbcERpMkQk' },
+      'TON':      { 'TONCoin': 'UQCB2UuK7q_pnBnOR7O8VWfNx2b1AJ_5Fot1MrKtvf5VgirB' },
+      'DOGECOIN': { 'DOGECOIN': 'DKQxhd6pqBbwd3huuWMsRsCcjCdufacpmF' }
+    };
+
     const retraitWallets = {
       'BINANCE': { color: '#f3ba2f', icon: 'B', logo: 'https://pfst.cf2.poecdn.net/base/image/b0680c4cc24fb5e8a959f250ef10556ebb290e7c8f40bb026eeaef4f60ddfcf3?w=384&h=408', id: '1251279130', email: 'mkcryptindustrie@gmail.com' },
       'OKX': { color: '#000000', icon: 'O', logo: 'https://pfst.cf2.poecdn.net/base/image/1b7d52db99a5b355f0462be0de1975b6ff6ab9a3a73befd2017142a9e22ae6df?w=418&h=429', email: 'mkcryptindustrie@gmail.com' },
@@ -7307,6 +7463,66 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
           </button>
         </div>
 
+        <!-- Network Selection Button -->
+        <div style="margin-top: 12px;">
+          <button id="selectRetraitNetworkBtn" onclick="toggleRetraitNetworkPanel()" style="width: 100%; padding: 14px 16px; font-size: 14px; font-weight: 700; font-family: 'Sora', sans-serif; background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; border-radius: 12px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(99,102,241,0.35);">
+            <span style="display:flex;align-items:center;gap:8px;"><span style="font-size: 18px;">🌐</span> <span id="retraitNetworkLabel">Choisir le Réseau</span></span>
+            <span id="retraitNetworkArrow" style="transition:transform 0.3s;">▼</span>
+          </button>
+          <!-- Panel réseaux -->
+          <div id="retraitNetworkPanel" style="display:none; margin-top:8px; background:var(--glass-1); border:2px solid rgba(99,102,241,0.3); border-radius:12px; overflow:hidden;">
+            <div class="retrait-network-option" data-net="TRC20" onclick="selectRetraitNetwork('TRC20')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">⚡</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">TRC20</span>
+            </div>
+            <div class="retrait-network-option" data-net="BSC (BNB Smart Chain BEP20)" onclick="selectRetraitNetwork('BSC (BNB Smart Chain BEP20)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🔶</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">BSC (BNB Smart Chain BEP20)</span>
+            </div>
+            <div class="retrait-network-option" data-net="LTC-(Litecoin)" onclick="selectRetraitNetwork('LTC-(Litecoin)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🥈</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">LTC-(Litecoin)</span>
+            </div>
+            <div class="retrait-network-option" data-net="POL-(POLYGON)" onclick="selectRetraitNetwork('POL-(POLYGON)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🟣</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">POL-(POLYGON)</span>
+            </div>
+            <div class="retrait-network-option" data-net="SOL-(SOLANA)" onclick="selectRetraitNetwork('SOL-(SOLANA)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🌞</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">SOL-(SOLANA)</span>
+            </div>
+            <div class="retrait-network-option" data-net="DOGECOIN" onclick="selectRetraitNetwork('DOGECOIN')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🐕</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">DOGECOIN</span>
+            </div>
+            <div class="retrait-network-option" data-net="XRB" onclick="selectRetraitNetwork('XRB')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">✖️</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">XRB</span>
+            </div>
+            <div class="retrait-network-option" data-net="TONCoin" onclick="selectRetraitNetwork('TONCoin')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">💎</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">TONCoin</span>
+            </div>
+            <div class="retrait-network-option" data-net="XRP" onclick="selectRetraitNetwork('XRP')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🔷</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">XRP</span>
+            </div>
+            <div class="retrait-network-option" data-net="BCH-(Bitcoin Cash)" onclick="selectRetraitNetwork('BCH-(Bitcoin Cash)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">💚</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">BCH-(Bitcoin Cash)</span>
+            </div>
+            <div class="retrait-network-option" data-net="SUI-(SUIcoin)" onclick="selectRetraitNetwork('SUI-(SUIcoin)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
+              <span style="font-size:18px;">🌊</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">SUI-(SUIcoin)</span>
+            </div>
+            <div class="retrait-network-option" data-net="ARB-(ARBITRUM)" onclick="selectRetraitNetwork('ARB-(ARBITRUM)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;">
+              <span style="font-size:18px;">🔵</span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">ARB-(ARBITRUM)</span>
+            </div>
+          </div>
+          <input type="hidden" id="retraitNetworkValue" value="">
+        </div>
+
         <!-- Phone/Name Input Zone -->
         <div id="simCardInfoZone" style="margin-top: 16px; background: var(--glass-1); border: 2px solid var(--border); border-radius: 14px; padding: 16px; text-align: left;">
           <p style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
@@ -7363,6 +7579,136 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
         }
         showWalletOptions();
       });
+    }
+
+    // ── Retrait Network Selector ─────────────────────────────────────────────
+    function toggleRetraitNetworkPanel() {
+      var panel = document.getElementById('retraitNetworkPanel');
+      var arrow = document.getElementById('retraitNetworkArrow');
+      if (!panel) return;
+      var isOpen = panel.style.display !== 'none';
+      panel.style.display = isOpen ? 'none' : 'block';
+      if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+
+      // Surligner en vert les réseaux compatibles avec le crypto actuel
+      if (!isOpen && currentRetraitCrypto) {
+        var validNets = cryptoNetworkMap[currentRetraitCrypto] || [];
+        document.querySelectorAll('.retrait-network-option').forEach(function(el) {
+          var net = el.getAttribute('data-net');
+          var isValid = validNets.indexOf(net) !== -1;
+          el.style.background = isValid ? 'rgba(16,185,129,0.12)' : '';
+          el.style.opacity = isValid ? '1' : '0.45';
+          // Ajouter badge compatible
+          var badge = el.querySelector('.net-badge');
+          if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'net-badge';
+            badge.style.cssText = 'margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;';
+            el.appendChild(badge);
+          }
+          if (isValid) {
+            badge.textContent = '✅';
+            badge.style.background = 'rgba(16,185,129,0.2)';
+            badge.style.color = '#10b981';
+          } else {
+            badge.textContent = '✗';
+            badge.style.background = 'rgba(239,68,68,0.15)';
+            badge.style.color = '#ef4444';
+          }
+        });
+      }
+    }
+
+    function selectRetraitNetwork(net) {
+      var label = document.getElementById('retraitNetworkLabel');
+      var input = document.getElementById('retraitNetworkValue');
+      var panel = document.getElementById('retraitNetworkPanel');
+      var arrow = document.getElementById('retraitNetworkArrow');
+      var btn   = document.getElementById('selectRetraitNetworkBtn');
+
+      if (label) label.textContent = net;
+      if (input) input.value = net;
+      if (panel) panel.style.display = 'none';
+      if (arrow) arrow.style.transform = 'rotate(0deg)';
+
+      // Vérifier compatibilité avec le crypto sélectionné
+      var crypto = currentRetraitCrypto;
+      var compatible = crypto && cryptoNetworkMap[crypto] && cryptoNetworkMap[crypto].indexOf(net) !== -1;
+
+      if (btn) {
+        btn.style.background = compatible
+          ? 'linear-gradient(135deg,#10b981,#059669)'
+          : 'linear-gradient(135deg,#ef4444,#dc2626)';
+      }
+
+      // Surligner l'option sélectionnée
+      document.querySelectorAll('.retrait-network-option').forEach(function(el) {
+        el.style.background = el.getAttribute('data-net') === net ? 'rgba(99,102,241,0.15)' : '';
+      });
+
+      // Zone d'affichage de l'adresse compatible
+      var addrZone = document.getElementById('retraitNetworkAddressZone');
+      if (!addrZone) {
+        addrZone = document.createElement('div');
+        addrZone.id = 'retraitNetworkAddressZone';
+        addrZone.style.cssText = 'margin-top:10px;';
+        var netBtn = document.getElementById('selectRetraitNetworkBtn');
+        if (netBtn && netBtn.parentNode) netBtn.parentNode.appendChild(addrZone);
+      }
+
+      if (compatible && cryptoAddressByNetwork[crypto] && cryptoAddressByNetwork[crypto][net]) {
+        var addr = cryptoAddressByNetwork[crypto][net];
+        addrZone.innerHTML = '';
+        var box = document.createElement('div');
+        box.style.cssText = 'background:rgba(16,185,129,0.1);border:2px solid #10b981;border-radius:12px;padding:12px 14px;';
+
+        var title = document.createElement('p');
+        title.style.cssText = 'font-size:11px;color:#10b981;font-weight:700;margin-bottom:8px;';
+        title.textContent = '✅ Adresse compatible — ' + crypto + ' via ' + net;
+        box.appendChild(title);
+
+        var row = document.createElement('div');
+        row.style.cssText = 'display:flex;align-items:center;gap:8px;';
+
+        var addrEl = document.createElement('code');
+        addrEl.style.cssText = 'font-size:10px;font-weight:700;color:#f59e0b;font-family:"JetBrains Mono",monospace;word-break:break-all;flex:1;background:var(--bg-secondary);padding:8px;border-radius:8px;';
+        addrEl.textContent = addr;
+        row.appendChild(addrEl);
+
+        var copyBtn = document.createElement('button');
+        copyBtn.textContent = '⧉';
+        copyBtn.style.cssText = 'background:rgba(16,185,129,0.15);border:1px solid #10b981;color:#10b981;padding:6px 10px;border-radius:8px;font-size:16px;cursor:pointer;flex-shrink:0;';
+        copyBtn.addEventListener('click', function() {
+          copyToClipboard(addr, function() {
+            copyBtn.textContent = '✅';
+            setTimeout(function() { copyBtn.textContent = '⧉'; }, 1500);
+            showToast('📋 Adresse copiée !', '#10b981');
+          });
+        });
+        row.appendChild(copyBtn);
+        box.appendChild(row);
+        addrZone.appendChild(box);
+        showToast('✅ Réseau compatible : ' + net, '#10b981');
+      } else if (crypto) {
+        // Réseau incompatible — afficher erreur + réseaux corrects
+        var validNets = (cryptoNetworkMap[crypto] || []).join(', ');
+        addrZone.innerHTML = '';
+        var errBox = document.createElement('div');
+        errBox.style.cssText = 'background:rgba(239,68,68,0.1);border:2px solid #ef4444;border-radius:12px;padding:12px 14px;';
+        var errTitle = document.createElement('p');
+        errTitle.style.cssText = 'font-size:12px;color:#ef4444;font-weight:700;margin-bottom:6px;';
+        errTitle.textContent = '❌ Réseau incompatible avec ' + crypto;
+        var errSub = document.createElement('p');
+        errSub.style.cssText = 'font-size:11px;color:var(--text-muted);';
+        errSub.textContent = '✅ Réseaux acceptés : ' + validNets;
+        errBox.appendChild(errTitle);
+        errBox.appendChild(errSub);
+        addrZone.appendChild(errBox);
+        showToast('❌ Mauvais réseau pour ' + crypto, '#ef4444');
+      } else {
+        addrZone.innerHTML = '';
+        showToast('🌐 Réseau: ' + net, '#6366f1');
+      }
     }
 
     // Show wallet options
@@ -7494,12 +7840,44 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
             container.insertAdjacentHTML('beforeend', btnHtml);
             confirmBtn = $('confirmWalletSelectionBtn');
             confirmBtn.addEventListener('click', () => {
-              if (!selectedWallet) return;
+              if (!selectedWallet) {
+                showCustomAlert('Veuillez choisir un portefeuille.');
+                return;
+              }
               const amount = parseFloat($('retraitCryptoAmount').value) || 0;
-              const rate = getRetraitRate(currentRetraitCrypto);
-              const ariaryAmount = amount * rate;
+              if (amount <= 0) {
+                showCustomAlert('Veuillez entrer un montant valide.');
+                return;
+              }
+              const selectedNetwork = document.getElementById('retraitNetworkValue') ? document.getElementById('retraitNetworkValue').value.trim() : '';
+              if (!selectedNetwork) {
+                showCustomAlert('Veuillez choisir un reseau crypto.');
+                return;
+              }
+              // Vérifier compatibilité réseau
+              const validNets = cryptoNetworkMap[currentRetraitCrypto] || [];
+              if (validNets.length > 0 && validNets.indexOf(selectedNetwork) === -1) {
+                showCustomAlert('Reseau incompatible avec ' + currentRetraitCrypto + '. Valides: ' + validNets.join(', '));
+                return;
+              }
               const phoneNumber = $('retraitPhoneNumber') ? $('retraitPhoneNumber').value.trim() : '';
               const simName = $('retraitSimName') ? $('retraitSimName').value.trim() : '';
+              // Pour Site Web et Trust Wallet, le réseau est requis
+              const walletNeedsAddr = (selectedWallet === 'Site Web' || selectedWallet === 'Trust Wallet');
+              if (walletNeedsAddr && !selectedNetwork) {
+                showCustomAlert('Veuillez selectionner un reseau pour ' + selectedWallet + '.');
+                return;
+              }
+              if (!walletNeedsAddr && !phoneNumber) {
+                showCustomAlert('Veuillez entrer votre numero de telephone.');
+                return;
+              }
+              if (!walletNeedsAddr && !simName) {
+                showCustomAlert('Veuillez entrer le nom sur la puce.');
+                return;
+              }
+              const rate = getRetraitRate(currentRetraitCrypto);
+              const ariaryAmount = amount * rate;
               showRetraitConfirmation(currentRetraitCrypto, amount, selectedWallet, ariaryAmount, phoneNumber, simName);
             });
           }
