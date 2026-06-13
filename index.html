@@ -1057,7 +1057,326 @@
       }
     }
 
-    /* Conseils (Vidéo fampianarana) buttons - Blue-violet glowing borders */
+    /* ===== PROFESSIONAL DASHBOARD STYLES ===== */
+
+    /* Override: remove old glow on home cards since we have new styles */
+    #home .db-card,
+    #home .db-action-btn {
+      border: none;
+      box-shadow: none;
+      animation: none;
+    }
+
+    .db-header {
+      background: linear-gradient(160deg, #1a0a38 0%, #0f0620 100%);
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .db-header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(192,38,211,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .db-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .db-greeting {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+
+    .db-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .db-status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #34d399;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .db-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: statusPulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+    }
+
+    /* Balance card */
+    .db-balance-card {
+      background: linear-gradient(135deg, rgba(192,38,211,0.18) 0%, rgba(6,182,212,0.12) 100%);
+      border: 1px solid rgba(192,38,211,0.25);
+      border-radius: 20px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .db-balance-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(6,182,212,0.07) 100%);
+      pointer-events: none;
+    }
+
+    .db-balance-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .db-balance-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .db-balance-icon {
+      font-size: 28px;
+      font-weight: 900;
+      font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .db-balance-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: -1px;
+    }
+
+    .db-balance-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Action buttons inside balance card */
+    .db-action-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .db-action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 16px;
+      border-radius: 14px;
+      border: none;
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      letter-spacing: 0.2px;
+    }
+
+    .db-action-depot {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 16px rgba(16,185,129,0.35);
+    }
+
+    .db-action-depot:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(16,185,129,0.5);
+    }
+
+    .db-action-retrait {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      box-shadow: 0 4px 16px rgba(245,158,11,0.35);
+    }
+
+    .db-action-retrait:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,158,11,0.5);
+    }
+
+    /* Services list */
+    .db-section {
+      padding: 20px 16px 24px;
+    }
+
+    .db-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .db-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+      border: 1px solid var(--border);
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .db-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 3px 0 0 3px;
+      background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .db-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px var(--shadow), -4px 0 0 var(--accent-primary);
+    }
+
+    .db-card:hover::before { opacity: 1; }
+
+    .db-card:active {
+      transform: translateX(2px) scale(0.99);
+    }
+
+    .db-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .db-icon-fire {
+      background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(245,158,11,0.2));
+      color: #f87171;
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    .db-icon-play {
+      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
+      color: #a78bfa;
+      border: 1px solid rgba(99,102,241,0.2);
+    }
+
+    .db-icon-book {
+      background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(59,130,246,0.2));
+      color: #67e8f9;
+      border: 1px solid rgba(6,182,212,0.2);
+    }
+
+    .db-icon-history {
+      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(5,150,105,0.2));
+      color: #34d399;
+      border: 1px solid rgba(16,185,129,0.2);
+    }
+
+    .db-card-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .db-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .db-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .db-card-arrow {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .db-card:hover .db-card-arrow {
+      color: var(--accent-primary);
+      transform: translateX(3px);
+    }
+
+    /* Light mode overrides */
+    :root.light .db-header {
+      background: linear-gradient(160deg, #f3e8ff 0%, #faf5ff 100%);
+    }
+
+    :root.light .db-balance-card {
+      background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(8,145,178,0.07) 100%);
+      border-color: rgba(168,85,247,0.2);
+    }
+
+    :root.light .db-card {
+      background: white;
+      box-shadow: 0 1px 8px rgba(138,43,226,0.07);
+    }
     #conseils .btn,
     #conseils .big-btn {
       border: 2px solid #8b5cf6;
@@ -2361,51 +2680,98 @@
       </section>
 
       <!-- Home Page -->
-      <section id="home" class="page">
-        <h2 data-i18n="dashboard_title">Tableau de bord</h2>
-        <p class="sub" style="font-weight: 700;" data-i18n="dashboard_subtitle">Bienvenue ! Sélectionnez une action ci-dessous ou explorez le menu latéral.</p>
+      <section id="home" class="page" style="padding: 0;">
 
-        <!-- Dépôt / Retrait Buttons -->
-        <div style="display: flex; gap: 12px; margin-bottom: 20px; margin-top: 16px;">
-          <button id="depotMainBtn" class="btn primary" style="flex: 1; padding: 16px; font-size: 16px; font-weight: 700; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #10b981, #059669); border: none; color: white; cursor: pointer; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4); transition: all 0.3s ease;">
-            <span style="font-size: 20px;">💰</span> Dépôt
-          </button>
-          <button id="retraitMainBtn" class="btn" style="flex: 1; padding: 16px; font-size: 16px; font-weight: 700; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: white; cursor: pointer; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4); transition: all 0.3s ease;">
-            <span style="font-size: 20px;">💸</span> Retrait
-          </button>
-        </div>
-
-        <div class="grid">
-          <div class="big-btn" id="cmdBtn">
-            <span class="dot"></span>
+        <!-- Dashboard Header -->
+        <div class="db-header">
+          <div class="db-header-top">
             <div>
-              <div class="big-text" data-i18n="home_cmd_apk">🔥 Anao Commande APK V2</div>
-              <div class="sub" data-i18n="home_cmd_apk_desc">Télécharger ou commander l'application</div>
+              <div class="db-greeting" data-i18n="dashboard_title">Tableau de bord</div>
+              <div class="db-sub" data-i18n="dashboard_subtitle">MK Crypt · Application Premium</div>
+            </div>
+            <div class="db-status-badge">
+              <span class="db-status-dot"></span> Actif
             </div>
           </div>
 
-          <div class="big-btn" id="guide1Btn">
-            <span class="dot"></span>
-            <div>
-              <div class="big-text" data-i18n="home_guide1">🉑 Vidéo guide fanaovana commande ny APK V2</div>
-              <div class="sub" data-i18n="home_guide1_desc">Instructions complètes en malgache</div>
+          <!-- Balance card -->
+          <div class="db-balance-card">
+            <div class="db-balance-label">Portefeuille MK Crypt</div>
+            <div class="db-balance-row">
+              <span class="db-balance-icon">&#8383;</span>
+              <span class="db-balance-value">Premium</span>
             </div>
-          </div>
-
-          <div class="big-btn" id="guide2Btn">
-            <span class="dot"></span>
-            <div>
-              <div class="big-text" data-i18n="home_guide2">💸 Vidéo fampianarana mombany APK</div>
-              <div class="sub" data-i18n="home_guide2_desc">Mode d'emploi détaillé & astuces</div>
+            <div class="db-balance-meta">Accès complet · Toutes fonctionnalités</div>
+            <div class="db-action-row">
+              <button id="depotMainBtn" class="db-action-btn db-action-depot">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                Dépôt
+              </button>
+              <button id="retraitMainBtn" class="db-action-btn db-action-retrait">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                Retrait
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="spaced">
-          <button class="btn" id="histoireMkCryptBtn" style="width: 100%;" data-i18n="home_histoire_btn">
-            📜 Histoire de MK Crypt sur la cryptomonnaie
-          </button>
+        <!-- Services section -->
+        <div class="db-section">
+          <div class="db-section-label">Services</div>
+
+          <div class="db-card" id="cmdBtn">
+            <div class="db-card-icon db-icon-fire">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 01-7 7 7 7 0 01-7-7 7 7 0 010-1c.5-2.5 1.5-4.5 3-6"/></svg>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title" data-i18n="home_cmd_apk">Commande APK V2</div>
+              <div class="db-card-desc" data-i18n="home_cmd_apk_desc">Télécharger ou commander l'application</div>
+            </div>
+            <div class="db-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <div class="db-card" id="guide1Btn">
+            <div class="db-card-icon db-icon-play">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title" data-i18n="home_guide1">Guide Commande APK V2</div>
+              <div class="db-card-desc" data-i18n="home_guide1_desc">Instructions complètes en malgache</div>
+            </div>
+            <div class="db-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <div class="db-card" id="guide2Btn">
+            <div class="db-card-icon db-icon-book">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title" data-i18n="home_guide2">Formation &amp; Astuces APK</div>
+              <div class="db-card-desc" data-i18n="home_guide2_desc">Mode d'emploi détaillé &amp; astuces</div>
+            </div>
+            <div class="db-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <div class="db-card" id="histoireMkCryptBtn">
+            <div class="db-card-icon db-icon-history">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title" data-i18n="home_histoire_btn">Histoire de MK Crypt</div>
+              <div class="db-card-desc">Notre parcours sur la cryptomonnaie</div>
+            </div>
+            <div class="db-card-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
         </div>
+
       </section>
 
       <!-- Parcours Page -->
@@ -5429,12 +5795,27 @@
   </div>
 
   <!-- Retrait Modal -->
+  <!-- Retrait Modal — design harmonisé avec Dépôt -->
   <div class="crypto-modal" id="retraitModal">
-    <div class="crypto-modal-content" style="text-align: center; max-height: 85vh; overflow-y: auto;">
+    <div class="crypto-modal-content" style="max-height: 85vh; overflow-y: auto;">
       <button class="crypto-modal-close" id="closeRetraitModal">✕</button>
-      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💸 Retrait</h3>
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Sélectionnez une crypto pour effectuer un retrait</p>
-      <div id="retraitCryptoList" style="display: grid; gap: 10px; text-align: left;"></div>
+      <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 8px; text-align: center; background: linear-gradient(135deg, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💸 Retrait</h3>
+      <p style="text-align: center; font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">Sélectionnez votre portefeuille</p>
+
+      <!-- Wallet list -->
+      <div id="retraitWalletGrid">
+        <!-- Dynamically filled by populateRetraitCryptoList() -->
+      </div>
+
+      <!-- Crypto list (shown after wallet selection) -->
+      <div id="retraitCryptoSection" style="display: none;">
+        <div id="retraitWalletHeader" style="display: flex; align-items: center; gap: 10px; padding: 10px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 12px;">
+          <button onclick="document.getElementById('retraitCryptoSection').style.display='none'; document.getElementById('retraitWalletGrid').style.display='block';" style="background: var(--glass-1); border: 1px solid var(--border); color: var(--text-muted); width: 32px; height: 32px; border-radius: 8px; font-size: 16px; cursor: pointer; flex-shrink: 0; display:flex; align-items:center; justify-content:center;">←</button>
+          <div id="retraitWalletInfo"></div>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px; font-weight: 600;">Choisissez la crypto à retirer :</p>
+        <div id="retraitCryptoList" style="display: grid; gap: 8px; text-align: left;"></div>
+      </div>
     </div>
   </div>
 
@@ -5442,15 +5823,20 @@
   <div class="crypto-modal" id="retraitDetailModal">
     <div class="crypto-modal-content" style="text-align: center; max-height: 85vh; overflow-y: auto;">
       <button class="crypto-modal-close" id="closeRetraitDetailModal">✕</button>
-      <button id="backToRetraitList" style="position: absolute; top: 16px; left: 16px; background: var(--glass-1); border: 1px solid var(--border); color: var(--text-primary); width: 36px; height: 36px; border-radius: 10px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">←</button>
-      <div id="retraitDetailContent"></div>
+      <div id="retraitDetailContent">
+        <!-- Content will be dynamically inserted -->
+      </div>
+      <button id="backToRetraitList" class="btn" style="margin-top: 16px; width: 100%; background: var(--glass-1); border: 2px solid var(--border); color: var(--text-primary); padding: 14px; font-size: 15px; font-weight: 600; border-radius: 12px; cursor: pointer;">
+        ← Retour à la liste
+      </button>
     </div>
   </div>
 
   <!-- Retrait Confirmation Modal -->
   <div class="crypto-modal" id="retraitConfirmModal">
-    <div class="crypto-modal-content" style="text-align: center; max-height: 85vh; overflow-y: auto;">
+    <div class="crypto-modal-content" style="max-height: 85vh; overflow-y: auto;">
       <button class="crypto-modal-close" id="closeRetraitConfirmModal">✕</button>
+      <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 16px; text-align: center; background: linear-gradient(135deg, #10b981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">✅ Confirmation retrait</h3>
       <div id="retraitConfirmContent"></div>
     </div>
   </div>
@@ -5754,11 +6140,16 @@
 
     // ========== UI WIRING ==========
     const $ = id => document.getElementById(id);
+    // Safe addEventListener: silently skips if element not found
+    function on(id, event, handler) {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener(event, handler);
+    }
 
-    $('cmdBtn').addEventListener('click', () => showPage('cmdPage'));
-    $('guide1Btn').addEventListener('click', () => showPage('parcours'));
-    $('guide2Btn').addEventListener('click', () => showPage('conseils'));
-    $('histoireMkCryptBtn').addEventListener('click', () => showPage('histoire-mk-crypt'));
+    on('cmdBtn', 'click', () => showPage('cmdPage'));
+    on('guide1Btn', 'click', () => showPage('parcours'));
+    on('guide2Btn', 'click', () => showPage('conseils'));
+    on('histoireMkCryptBtn', 'click', () => showPage('histoire-mk-crypt'));
 
     // ========== PUCE SELECTION LOGIC ==========
     let selectedPuceName = '';
@@ -5776,7 +6167,7 @@
     });
 
     // Verify button - auto-fill Facebook username with selected puce name
-    $('verifyBtn').addEventListener('click', () => {
+    on('verifyBtn', 'click', () => {
       showPage('verifySection');
       // Auto-fill the Facebook username field with the selected puce name
       const facebookUsernameInput = $('facebookUsername');
@@ -5785,16 +6176,16 @@
       }
     });
 
-    $('prix60kBtn').addEventListener('click', () => showPage('prix60kPhotos'));
+    on('prix60kBtn', 'click', () => showPage('prix60kPhotos'));
 
     // Crypto Payment Modal
-    $('cryptoPayBtn').addEventListener('click', () => {
+    on('cryptoPayBtn', 'click', () => {
       $('cryptoPayModal').classList.add('open');
     });
-    $('closeCryptoModal').addEventListener('click', () => {
+    on('closeCryptoModal', 'click', () => {
       $('cryptoPayModal').classList.remove('open');
     });
-    $('cryptoPayModal').addEventListener('click', (e) => {
+    on('cryptoPayModal', 'click', (e) => {
       if (e.target === $('cryptoPayModal')) {
         $('cryptoPayModal').classList.remove('open');
       }
@@ -5917,10 +6308,10 @@
       }
     }
 
-    $('binanceOption').addEventListener('click', () => showCryptoDetail('binance'));
-    $('mexcOption').addEventListener('click', () => showCryptoDetail('mexc'));
-    $('bybitOption').addEventListener('click', () => showCryptoDetail('bybit'));
-    $('trustWalletOption').addEventListener('click', () => showCryptoDetail('trustwallet'));
+    on('binanceOption', 'click', () => showCryptoDetail('binance'));
+    on('mexcOption', 'click', () => showCryptoDetail('mexc'));
+    on('bybitOption', 'click', () => showCryptoDetail('bybit'));
+    on('trustWalletOption', 'click', () => showCryptoDetail('trustwallet'));
 
     // Trust Wallet crypto address details
     const trustWalletAddresses = {
@@ -5985,14 +6376,14 @@
       }
     });
 
-    $('closeCryptoDetailModal').addEventListener('click', () => {
+    on('closeCryptoDetailModal', 'click', () => {
       $('cryptoDetailModal').classList.remove('open');
     });
-    $('backToCryptoList').addEventListener('click', () => {
+    on('backToCryptoList', 'click', () => {
       $('cryptoDetailModal').classList.remove('open');
       $('cryptoPayModal').classList.add('open');
     });
-    $('cryptoDetailModal').addEventListener('click', (e) => {
+    on('cryptoDetailModal', 'click', (e) => {
       if (e.target === $('cryptoDetailModal')) {
         $('cryptoDetailModal').classList.remove('open');
       }
@@ -6089,61 +6480,168 @@
     let ratesLastUpdated = null;
     const USD_TO_MGA = 4620;
 
-    async function fetchLiveRates() {
+    // Mapping CoinGecko IDs → symboles internes
+    const COINGECKO_IDS = {
+      'tether':        'USDT',
+      'binancecoin':   'BNB',
+      'tron':          'TRX',
+      'litecoin':      'LTC',
+      'matic-network': 'POLYGON',
+      'bitcoin-cash':  'BCH',
+      'solana':        'SOL',
+      'sui':           'SUI',
+      'arbitrum':      'ARB',
+      'ripple':        'XRP',
+      'the-open-network': 'TON',
+      'dogecoin':      'DOGECOIN'
+    };
+    const CG_IDS_STR = Object.keys(COINGECKO_IDS).join(',');
+    const RATES_CACHE_KEY = 'mkCryptoRatesCache';
+
+    // ── Vérifie si le cache appartient bien au jour calendaire actuel ──────────
+    function isCacheFromToday(timestamp) {
+      const cacheDate = new Date(timestamp);
+      const now = new Date();
+      return cacheDate.getFullYear() === now.getFullYear()
+          && cacheDate.getMonth()    === now.getMonth()
+          && cacheDate.getDate()     === now.getDate();
+    }
+
+    // Charger depuis localStorage si dispo et appartenant au jour courant
+    function loadCachedRates() {
       try {
-        const prompt = `Give me the current USD prices for these cryptocurrencies as a JSON object only, no explanation, no markdown, just raw JSON:
-{"USDT":1,"BNB":0,"TRX":0,"LTC":0,"POLYGON":0,"BCH":0,"SOL":0,"SUI":0,"ARB":0,"XRP":0,"TON":0,"DOGECOIN":0}
-Fill in the current market prices in USD for each. Return ONLY the JSON object.`;
+        const raw = localStorage.getItem(RATES_CACHE_KEY);
+        if (!raw) return false;
+        const cache = JSON.parse(raw);
+        // Cache valide uniquement si du même jour calendaire
+        if (!isCacheFromToday(cache.timestamp)) {
+          localStorage.removeItem(RATES_CACHE_KEY); // purger l'ancien
+          return false;
+        }
+        Object.assign(cryptoRates, cache.rates);
+        ratesLastUpdated = new Date(cache.timestamp);
+        console.log('✅ Taux du jour chargés depuis cache localStorage');
+        return true;
+      } catch(e) { return false; }
+    }
 
-        const res = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: "claude-haiku-4-5-20251001",
-            max_tokens: 300,
-            messages: [{ role: "user", content: prompt }]
-          })
-        });
+    function saveCachedRates(rates) {
+      try {
+        localStorage.setItem(RATES_CACHE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          rates: rates
+        }));
+      } catch(e) {}
+    }
 
-        if (!res.ok) throw new Error('API error ' + res.status);
+    // ── Planifie le prochain fetch à minuit (changement de jour) ──────────────
+    function scheduleMidnightRefresh() {
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 5);
+      const msUntilMidnight = tomorrow - now;
+      setTimeout(async function() {
+        localStorage.removeItem(RATES_CACHE_KEY); // forcer nouveau fetch
+        await fetchLiveRates();
+        scheduleMidnightRefresh(); // replanifier pour le jour suivant
+      }, msUntilMidnight);
+      console.log('⏰ Prochain refresh taux à minuit dans ' + Math.round(msUntilMidnight / 60000) + ' min');
+    }
+
+    async function fetchUsdToMga() {
+      // Taux USD→MGA via exchangerate-api (gratuit, sans clé)
+      try {
+        const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        if (!res.ok) throw new Error('forex error');
         const data = await res.json();
-        const text = data.content[0].text.trim();
+        const mga = data.rates && data.rates.MGA;
+        if (mga && mga > 1000) return Math.round(mga);
+      } catch(e) {}
+      return USD_TO_MGA; // fallback
+    }
 
-        // Parse JSON from response
-        const jsonMatch = text.match(/\{[^}]+\}/);
-        if (!jsonMatch) throw new Error('No JSON found');
-        const prices = JSON.parse(jsonMatch[0]);
+    async function fetchLiveRates() {
+      // Vérifier si cache valide du jour courant
+      if (loadCachedRates()) {
+        updateRatesBadge(true);
+        return;
+      }
+      updateRatesBadge(false); // afficher "Chargement..." pendant la requête
+      try {
+        // 1. Taux USD/MGA du jour
+        const usdMga = await fetchUsdToMga();
 
-        // Convert USD → MGA
+        // 2. Prix crypto en USD via CoinGecko (API publique gratuite)
+        const cgUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=' + CG_IDS_STR + '&vs_currencies=usd';
+        const res = await fetch(cgUrl);
+        if (!res.ok) throw new Error('CoinGecko error ' + res.status);
+        const prices = await res.json();
+
         let updated = 0;
-        for (const [sym, usdPrice] of Object.entries(prices)) {
-          if (sym in cryptoRatesFallback && usdPrice > 0) {
-            cryptoRates[sym] = Math.round(parseFloat(usdPrice) * USD_TO_MGA);
+        const newRates = {};
+        for (const [cgId, sym] of Object.entries(COINGECKO_IDS)) {
+          if (prices[cgId] && prices[cgId].usd > 0) {
+            newRates[sym] = Math.round(prices[cgId].usd * usdMga);
             updated++;
           }
         }
-        if (updated < 5) throw new Error('Not enough prices returned');
+        if (updated < 5) throw new Error('Pas assez de prix retournés');
 
+        Object.assign(cryptoRates, newRates);
         ratesLastUpdated = new Date();
+        saveCachedRates({ ...cryptoRates });
         updateRatesBadge(true);
-        console.log('✅ Taux mis à jour via API:', cryptoRates);
+        console.log('✅ Taux du jour mis à jour via CoinGecko (1 USD = ' + usdMga + ' MGA):', cryptoRates);
 
       } catch (e) {
-        console.log('Taux de base utilisés:', e.message);
+        console.log('⚠️ Taux de base utilisés:', e.message);
+        // Essai avec Anthropic comme fallback si CoinGecko échoue
+        try {
+          const prompt = `Give me the current USD prices for these cryptocurrencies as a JSON object only, no markdown:
+{"USDT":1,"BNB":0,"TRX":0,"LTC":0,"POLYGON":0,"BCH":0,"SOL":0,"SUI":0,"ARB":0,"XRP":0,"TON":0,"DOGECOIN":0}
+Return ONLY the JSON object with real current prices.`;
+          const r2 = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 300,
+              messages: [{ role: "user", content: prompt }] })
+          });
+          if (r2.ok) {
+            const d2 = await r2.json();
+            const txt = d2.content[0].text.trim();
+            const m = txt.match(/\{[\s\S]*?\}/);
+            if (m) {
+              const p2 = JSON.parse(m[0]);
+              for (const [sym, usdP] of Object.entries(p2)) {
+                if (sym in cryptoRatesFallback && usdP > 0)
+                  cryptoRates[sym] = Math.round(parseFloat(usdP) * USD_TO_MGA);
+              }
+              ratesLastUpdated = new Date();
+              saveCachedRates({ ...cryptoRates });
+              updateRatesBadge(true);
+              return;
+            }
+          }
+        } catch(e2) {}
         updateRatesBadge(false);
       }
     }
 
     function updateRatesBadge(success) {
       const badges = document.querySelectorAll('.rates-live-badge');
+      const now = new Date();
       badges.forEach(b => {
         if (success && ratesLastUpdated) {
+          const day   = ratesLastUpdated.getDate().toString().padStart(2,'0');
+          const month = (ratesLastUpdated.getMonth()+1).toString().padStart(2,'0');
+          const year  = ratesLastUpdated.getFullYear();
           const h = ratesLastUpdated.getHours().toString().padStart(2,'0');
           const m = ratesLastUpdated.getMinutes().toString().padStart(2,'0');
-          b.textContent = '🟢 Taux en direct ' + h + ':' + m;
-          b.style.color = '#10b981';
+          // Mettre en évidence si les taux sont du jour courant
+          const isToday = isCacheFromToday(ratesLastUpdated.getTime());
+          b.textContent = (isToday ? '🟢' : '🟡') + ' Taux du ' + day + '/' + month + '/' + year + ' ' + h + ':' + m;
+          b.style.color = isToday ? '#10b981' : '#f59e0b';
         } else {
-          b.textContent = '🟡 Taux du 07/06/2026';
+          b.textContent = '🔄 Chargement des taux du jour...';
           b.style.color = '#f59e0b';
         }
       });
@@ -6158,7 +6656,6 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       }
       document.querySelectorAll('.rates-live-badge').forEach(function(b) {
         var existing = b.textContent;
-        // Remove old countdown
         var base = existing.replace(/ \(\d+s\)$/, '');
         b.textContent = base + ' (' + countdownSeconds + 's)';
       });
@@ -6168,7 +6665,10 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     // Afficher les taux de base immédiatement, puis tenter la mise à jour
     updateRatesBadge(false);
     fetchLiveRates();
-    setInterval(fetchLiveRates, 60 * 1000); // Mise à jour toutes les 60 secondes
+    // Planifier le refresh automatique à minuit chaque jour
+    scheduleMidnightRefresh();
+    // Sécurité : re-vérifier toutes les heures si le jour a changé entre-temps
+    setInterval(fetchLiveRates, 60 * 60 * 1000);
 
     // ========== COPIE UNIVERSELLE (compatible file://) ==========
     function copyToClipboard(text, onSuccess) {
@@ -6417,8 +6917,84 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     });
 
         // ── AUTO-REFRESH des conversions affichées toutes les 60 secondes ──────────
+    // Track if input listener already attached
+    var _depotInputListenerAttached = false;
+
+    function attachDepotInputListener() {
+      var inp = document.getElementById('depotAmountAriary');
+      if (!inp || _depotInputListenerAttached) return;
+      _depotInputListenerAttached = true;
+      inp.addEventListener('input', function() {
+        // Utiliser requestAnimationFrame pour un rendu immédiat sans blocage
+        requestAnimationFrame(function() {
+        var crypto = currentDepotCrypto;
+        if (!crypto) return;
+        var amount = parseFloat(inp.value) || 0;
+        var liveRate = getDepotRate(crypto);
+        var convDisp = document.getElementById('conversionDisplay');
+        var convAmt  = document.getElementById('convertedAmount');
+        var rateEl   = document.getElementById('depotRateDisplay');
+        var networkVal = document.getElementById('depotNetwork') ? document.getElementById('depotNetwork').value : '';
+        if (rateEl) rateEl.textContent = 'Taux: 1 ' + crypto + ' ≈ ' + Math.round(liveRate).toLocaleString() + ' MGA';
+        if (amount > 0) {
+          var raw = amount / liveRate;
+          var dec = raw >= 100 ? 2 : raw >= 1 ? 4 : 6;
+          if (convAmt) convAmt.textContent = raw.toFixed(dec) + ' ' + crypto;
+          if (convDisp) convDisp.style.display = 'block';
+          // Frais Trust Wallet
+          var feeCrypto = networkVal ? getBinanceFee(crypto, networkVal) : null;
+          var feeMGA    = networkVal ? getBinanceFeeMGA(crypto, networkVal) : null;
+          var feesEl = document.getElementById('depotNetworkFees');
+          if (!feesEl && convDisp) {
+            feesEl = document.createElement('div');
+            feesEl.id = 'depotNetworkFees';
+            feesEl.style.cssText = 'margin-top:8px;padding:10px 14px;background:rgba(245,158,11,0.1);border:1.5px solid rgba(245,158,11,0.3);border-radius:10px;font-size:12px;';
+            convDisp.parentNode.insertBefore(feesEl, convDisp.nextSibling);
+          }
+          if (feesEl) {
+            if (feeCrypto !== null && networkVal) {
+              feesEl.style.display = 'block';
+              feesEl.innerHTML = '';
+              var row = document.createElement('div');
+              row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:8px;';
+              var lbl = document.createElement('span');
+              lbl.style.color = 'var(--text-muted)';
+              var sn = networkVal.replace('BNB Smart Chain BEP20','BSC').replace('Bitcoin Cash','BCH').replace('-(','').replace(')','').replace('-',' ');
+              lbl.textContent = 'Frais Trust Wallet (' + sn + ') :';
+              var val = document.createElement('span');
+              val.style.cssText = 'font-weight:800;color:#f59e0b;font-family:JetBrains Mono,monospace;text-align:right;';
+              var main = document.createElement('div');
+              var fd = feeCrypto < 0.001 ? feeCrypto.toFixed(6) : feeCrypto < 1 ? feeCrypto.toFixed(4) : feeCrypto.toFixed(2);
+              main.textContent = fd + ' ' + crypto;
+              var sub = document.createElement('div');
+              sub.style.cssText = 'font-size:10px;color:var(--text-muted);';
+              sub.textContent = '≈ ' + (feeMGA||0).toLocaleString() + ' MGA';
+              val.appendChild(main); val.appendChild(sub);
+              row.appendChild(lbl); row.appendChild(val);
+              feesEl.appendChild(row);
+            } else {
+              feesEl.style.display = 'none';
+            }
+          }
+        } else {
+          if (convDisp) convDisp.style.display = 'none';
+          var fe = document.getElementById('depotNetworkFees');
+          if (fe) fe.style.display = 'none';
+        }
+        }); // end requestAnimationFrame
+      });
+      // Trigger on network change too
+      var netInp = document.getElementById('depotNetwork');
+      if (netInp) netInp.addEventListener('change', function() {
+        inp.dispatchEvent(new Event('input'));
+      });
+    }
+
     function refreshOpenConversions() {
-      // ── Dépôt ouvert ──
+      // ── Attacher le listener si dépôt ouvert ──
+      attachDepotInputListener();
+
+      // ── Dépôt ouvert — refresh taux ──
       var depotAmountInput = document.getElementById('depotAmountAriary');
       var conversionDisplay = document.getElementById('conversionDisplay');
       var convertedAmountEl = document.getElementById('convertedAmount');
@@ -6461,71 +7037,84 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     // Aussi rafraîchir visuellement le taux toutes les 60s même sans frappe
     setInterval(refreshOpenConversions, 60 * 1000);
 
-    // ── Marge commerciale : +7% sur dépôt, -7% sur retrait ──────────────────────
-    const DEPOT_MARGIN = 1.10;   // taux dépôt majoré +10% → client reçoit moins de crypto
-    const RETRAIT_MARGIN = 0.90; // taux retrait minoré -10% → client reçoit moins d'Ariary
+    // ── Marge commerciale : +5% sur dépôt, -8% sur retrait ──────────────────────
+    const DEPOT_MARGIN = 1.02;   // taux dépôt majoré +2%
+    const RETRAIT_MARGIN = 0.88; // taux retrait minoré -12% → prix plus bas pour l'utilisateur
 
-    // ── Frais réseau MVX Trade / marché 2026 (en crypto natif) ──────────────────
+    function getDepotRate(crypto) {
+      var base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4620;
+      return base * DEPOT_MARGIN;
+    }
+
+    function getRetraitRate(crypto) {
+      var base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4620;
+      return base * RETRAIT_MARGIN;
+    }
+
+    function convertMGAToCrypto(amountMGA, crypto) {
+      return (amountMGA / getDepotRate(crypto)).toFixed(6);
+    }
+
+    // ── Frais réseau Trust Wallet 2026 (en crypto natif) ─────────────────────────
     const binanceFeesByCrypto = {
-      "USDT": {
-            "TRC20": 1.0,
-            "POL-(POLYGON)": 0.5,
-            "BSC (BNB Smart Chain BEP20)": 0.5,
-            "ARB-(ARBITRUM)": 0.5,
-            "default": 1.0
-      },
-      "BNB": {
-            "BSC (BNB Smart Chain BEP20)": 0.00001,
-            "default": 0.00001
-      },
-      "TRX": {
-            "TRC20": 1.0,
-            "default": 1.0
-      },
-      "LTC": {
-            "LTC-(Litecoin)": 0.001,
-            "default": 0.001
-      },
-      "POLYGON": {
-            "POL-(POLYGON)": 0.09,
-            "default": 0.09
-      },
-      "BCH": {
-            "BCH-(Bitcoin Cash)": 0.0001,
-            "default": 0.0001
-      },
-      "SOL": {
-            "SOL-(SOLANA)": 0.00002,
-            "default": 0.00002
-      },
-      "SUI": {
-            "SUI-(SUIcoin)": 0.005,
-            "default": 0.005
-      },
-      "ARB": {
-            "ARB-(ARBITRUM)": 0.05,
-            "default": 0.05
-      },
-      "XRP": {
-            "XRB": 0.00001,
-            "XRP": 0.00001,
-            "default": 0.00001
-      },
-      "TON": {
-            "TONCoin": 0.00104,
-            "default": 0.00104
-      },
-      "DOGECOIN": {
-            "DOGECOIN": 0.05,
-            "default": 0.05
-      }
+    "USDT": {
+        "TRC20": 10.0,
+        "POL-(POLYGON)": 0.1,
+        "BSC (BNB Smart Chain BEP20)": 0.0005,
+        "ARB-(ARBITRUM)": 0.1,
+        "default": 10.0
+    },
+    "BNB": {
+        "BSC (BNB Smart Chain BEP20)": 0.0005,
+        "default": 0.0005
+    },
+    "TRX": {
+        "TRC20": 5.0,
+        "default": 5.0
+    },
+    "LTC": {
+        "LTC-(Litecoin)": 0.001,
+        "default": 0.001
+    },
+    "POLYGON": {
+        "POL-(POLYGON)": 0.01,
+        "default": 0.01
+    },
+    "BCH": {
+        "BCH-(Bitcoin Cash)": 0.0001,
+        "default": 0.0001
+    },
+    "SOL": {
+        "SOL-(SOLANA)": 0.000005,
+        "default": 0.000005
+    },
+    "SUI": {
+        "SUI-(SUIcoin)": 0.001,
+        "default": 0.001
+    },
+    "ARB": {
+        "ARB-(ARBITRUM)": 0.1,
+        "default": 0.1
+    },
+    "XRP": {
+        "XRB": 0.000012,
+        "XRP": 0.000012,
+        "default": 0.000012
+    },
+    "TON": {
+        "TONCoin": 0.005,
+        "default": 0.005
+    },
+    "DOGECOIN": {
+        "DOGECOIN": 1.0,
+        "default": 1.0
+    }
 };
 
     function getBinanceFee(crypto, network) {
       var feeMap = binanceFeesByCrypto[crypto];
       if (!feeMap) return null;
-      var fee = feeMap[network] || feeMap['default'] || null;
-      return fee;
+      return feeMap[network] || feeMap['default'] || null;
     }
 
     function getBinanceFeeMGA(crypto, network) {
@@ -6535,437 +7124,20 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       return Math.round(feeCrypto * cryptoRateMGA);
     }
 
-    function getDepotRate(crypto) {
-      const base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4600;
-      return base * DEPOT_MARGIN;
-    }
-
-    function getRetraitRate(crypto) {
-      const base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4600;
-      return base * RETRAIT_MARGIN;
-    }
-
-    // Function to convert MGA to crypto (dépôt — taux majoré)
-    function convertMGAToCrypto(amountMGA, crypto) {
-      return (amountMGA / getDepotRate(crypto)).toFixed(6);
-    }
-
-    // Current depot state
-    let currentDepotPlatform = null;
-    let currentDepotCrypto = null;
-
-    function showDepotPlatformDetail(platform) {
-      const config = depotPlatformCryptos[platform];
-      if (!config) return;
-      currentDepotPlatform = platform;
-
-      let logoHtml = '';
-      if (config.logo) {
-        logoHtml = `<img src="${config.logo}" alt="${config.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
-      } else {
-        logoHtml = `<span style="font-weight: 800; font-size: 18px; color: white;">${config.name.substring(0, 2).toUpperCase()}</span>`;
-      }
-
-      let cryptosHtml = config.cryptos.map(crypto => {
-        const style = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
-        return `
-          <div class="depot-crypto-item" data-crypto="${crypto}" style="background: var(--glass-1); border: 2px solid var(--border); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; transition: all 0.3s ease; cursor: pointer;">
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, ${style.color}, ${style.color}cc); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <span style="font-weight: 800; font-size: 16px; color: white;">${style.icon}</span>
-            </div>
-            <span style="font-size: 15px; font-weight: 700; color: var(--text-primary);">${crypto}</span>
-            <span style="margin-left: auto; font-size: 18px; color: var(--text-muted);">→</span>
-          </div>
-        `;
-      }).join('');
-
-      const content = `
-        <div style="margin-bottom: 24px;">
-          <div style="width: 80px; height: 80px; border-radius: 20px; background: linear-gradient(135deg, ${config.color}, ${config.color}cc); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 24px ${config.color}66; padding: 12px;">
-            ${logoHtml}
-          </div>
-          <h3 style="font-size: 22px; font-weight: 700; color: var(--text-primary);">${config.name}</h3>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Sélectionnez une crypto pour le dépôt</p>
-        </div>
-        <div style="display: grid; gap: 10px; text-align: left;">
-          ${cryptosHtml}
-        </div>
-      `;
-
-      $('depotDetailContent').innerHTML = content;
-      $('depotModal').classList.remove('open');
-      $('depotDetailModal').classList.add('open');
-
-      // Add hover effects for crypto items
-      document.querySelectorAll('.depot-crypto-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-          item.style.borderColor = '#10b981';
-          item.style.transform = 'translateX(4px)';
-          item.style.boxShadow = '0 4px 16px rgba(16, 185, 129, 0.3)';
-        });
-        item.addEventListener('mouseleave', () => {
-          item.style.borderColor = '';
-          item.style.transform = '';
-          item.style.boxShadow = '';
-        });
-      });
-    }
-
-    function showCryptoDepotForm(crypto) {
-      const style = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
-      currentDepotCrypto = crypto;
-
-      const content = `
-        <div style="margin-bottom: 24px;">
-          <div style="width: 70px; height: 70px; border-radius: 18px; background: linear-gradient(135deg, ${style.color}, ${style.color}cc); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 24px ${style.color}66;">
-            <span style="font-weight: 800; font-size: 28px; color: white;">${style.icon}</span>
-          </div>
-          <h3 style="font-size: 22px; font-weight: 700; color: var(--text-primary);">Dépôt ${crypto}</h3>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Remplissez les informations ci-dessous</p>
-        </div>
-
-        <!-- Montant en Ariary -->
-        <div style="margin-bottom: 16px; text-align: left;">
-          <label style="display: block; font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px;">
-            💵 Montant en Ariary (MGA)
-          </label>
-          <input type="number" id="depotAmountAriary" placeholder="Ex: 50000" min="4000" style="width: 100%; padding: 14px 16px; font-size: 16px; font-family: 'JetBrains Mono', monospace; border: 2px solid var(--border); border-radius: 12px; background: var(--glass-1); color: var(--text-primary); outline: none; transition: all 0.3s ease;" onfocus="this.style.borderColor='#10b981'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.2)';" onblur="this.style.borderColor=''; this.style.boxShadow='';">
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">⚠️ Minimum: <strong style="color: #f59e0b;">4 000 MGA</strong></p>
-
-          <!-- Badge taux live -->
-          <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 4px;">
-            <span class="rates-live-badge" style="font-size: 11px; font-weight: 600; color: #10b981;">🟢 Chargement des taux...</span>
-          </div>
-
-          <!-- Conversion Display -->
-          <div id="conversionDisplay" style="display: none; margin-top: 12px; padding: 14px 16px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border: 2px solid #10b981; border-radius: 12px; text-align: center;">
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">💱 Conversion en temps réel</p>
-            <p style="font-size: 20px; font-weight: 800; color: #10b981; font-family: 'JetBrains Mono', monospace;" id="convertedAmount">0.000000 ${crypto}</p>
-            <p style="font-size: 11px; color: var(--text-muted); margin-top: 6px;" id="depotRateDisplay">Taux: 1 ${crypto} ≈ ${Math.round(getDepotRate(crypto)).toLocaleString()} MGA</p>
-          </div>
-        </div>
-
-        <!-- Adresse Crypto -->
-        <div style="margin-bottom: 16px; text-align: left;">
-          <label style="display: block; font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px;">
-            🔗 Adresse ${crypto}
-          </label>
-          <input type="text" id="depotCryptoAddress" placeholder="Collez votre adresse ${crypto} ici" style="width: 100%; padding: 14px 16px; font-size: 14px; font-family: 'JetBrains Mono', monospace; border: 2px solid var(--border); border-radius: 12px; background: var(--glass-1); color: var(--text-primary); outline: none; transition: all 0.3s ease;" oninput="checkAddressLive(this.value)" onfocus="this.style.borderColor='#10b981'; this.style.boxShadow='0 0 0 3px rgba(16, 185, 129, 0.2)';" onblur="if(!this.value) { this.style.borderColor=''; this.style.boxShadow=''; }">
-          <div id="addressLiveIndicator" style="margin-top: 6px; font-size: 12px; display: none; padding: 6px 10px; border-radius: 8px; transition: all 0.3s;"></div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Adresse de réception pour ${crypto}</p>
-        </div>
-
-        <!-- Réseaux -->
-        <div style="margin-bottom: 24px; text-align: left;">
-          <label style="display: block; font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px;">
-            🌐 Réseau
-          </label>
-          <div id="networkSelector" style="position: relative;">
-            <button id="networkDropdownBtn" type="button" style="width: 100%; padding: 14px 16px; font-size: 14px; font-family: 'Sora', sans-serif; border: 2px solid var(--border); border-radius: 12px; background: var(--glass-1); color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease;">
-              <span id="selectedNetworkText">Sélectionner un réseau</span>
-              <span style="font-size: 12px;">▼</span>
-            </button>
-            <input type="hidden" id="depotNetwork" value="">
-            <div id="networkDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 12px; max-height: 200px; overflow-y: auto; z-index: 100; box-shadow: 0 8px 24px var(--shadow);">
-              <div class="network-option" data-network="TRC20" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #e4002b; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">T</span>
-                <span style="font-weight: 600;">TRC20</span>
-              </div>
-              <div class="network-option" data-network="BSC (BNB Smart Chain BEP20)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #f0b90b; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">B</span>
-                <span style="font-weight: 600;">BSC (BNB Smart Chain BEP20)</span>
-              </div>
-              <div class="network-option" data-network="LTC-(Litecoin)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #345d9d; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">Ł</span>
-                <span style="font-weight: 600;">LTC-(Litecoin)</span>
-              </div>
-              <div class="network-option" data-network="POL-(POLYGON)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #8247e5; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">P</span>
-                <span style="font-weight: 600;">POL-(POLYGON)</span>
-              </div>
-              <div class="network-option" data-network="SOL-(SOLANA)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #9945ff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">S</span>
-                <span style="font-weight: 600;">SOL-(SOLANA)</span>
-              </div>
-              <div class="network-option" data-network="DOGECOIN" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #c2a633; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">Ð</span>
-                <span style="font-weight: 600;">DOGECOIN</span>
-              </div>
-              <div class="network-option" data-network="XRB" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #4a90d9; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">X</span>
-                <span style="font-weight: 600;">XRB</span>
-              </div>
-              <div class="network-option" data-network="TONCoin" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #0088cc; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">T</span>
-                <span style="font-weight: 600;">TONCoin</span>
-              </div>
-              <div class="network-option" data-network="XRP" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #23292f; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">X</span>
-                <span style="font-weight: 600;">XRP</span>
-              </div>
-              <div class="network-option" data-network="BCH-(Bitcoin Cash)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #8dc351; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">₿</span>
-                <span style="font-weight: 600;">BCH-(Bitcoin Cash)</span>
-              </div>
-              <div class="network-option" data-network="SUI-(SUIcoin)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease; border-bottom: 1px solid var(--border);">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #4da2ff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">S</span>
-                <span style="font-weight: 600;">SUI-(SUIcoin)</span>
-              </div>
-              <div class="network-option" data-network="ARB-(ARBITRUM)" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease;">
-                <span style="width: 28px; height: 28px; border-radius: 6px; background: #28a0f0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white;">A</span>
-                <span style="font-weight: 600;">ARB-(ARBITRUM)</span>
-              </div>
-            </div>
-          </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Choisissez le réseau de transfert</p>
-        </div>
-
-        <!-- Mode de paiement -->
-        <div style="text-align: left; margin-bottom: 16px;">
-          <label style="display: block; font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 12px;">
-            💳 Mode de paiement
-          </label>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <button class="depot-payment-btn" data-payment="orange" style="width: 100%; padding: 14px 16px; border-radius: 12px; background: linear-gradient(135deg, #ff6600, #e55a00); border: none; color: white; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);">
-              <img src="https://pfst.cf2.poecdn.net/base/image/32ec80e60a91cc524d9451147ea902250cb79c89da117ab3da542cb9180c1895?w=184&h=185" alt="Orange" style="width: 24px; height: 24px; border-radius: 6px; object-fit: cover;"> Payer par Orange Money
-            </button>
-            <button class="depot-payment-btn" data-payment="mvola" style="width: 100%; padding: 14px 16px; border-radius: 12px; background: linear-gradient(135deg, #ffcc00, #e6b800); border: none; color: #333; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);">
-              <img src="https://pfst.cf2.poecdn.net/base/image/1a2e3a53b9075e8a7b6a8b910699ca3414a4c73b25dae6b1f9a35ba56f33ee8b?w=354&h=347" alt="MVola" style="width: 24px; height: 24px; border-radius: 6px; object-fit: cover;"> Payer par MVola
-            </button>
-            <button class="depot-payment-btn" data-payment="airtel" style="width: 100%; padding: 14px 16px; border-radius: 12px; background: linear-gradient(135deg, #e4002b, #cc0026); border: none; color: white; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(228, 0, 43, 0.3);">
-              <img src="https://pfst.cf2.poecdn.net/base/image/d1a6138e8ffab19aaf09310b3099b0701e362da5efc06552e41236884c40b342?w=472&h=446" alt="Airtel" style="width: 24px; height: 24px; border-radius: 6px; object-fit: cover;"> Payer par Airtel Money
-            </button>
-          </div>
-        </div>
-      `;
-
-      $('depotDetailContent').innerHTML = content;
-
-      // Amount input conversion handler
-      const amountInput = document.getElementById('depotAmountAriary');
-      const conversionDisplay = document.getElementById('conversionDisplay');
-      const convertedAmountEl = document.getElementById('convertedAmount');
-
-      if (amountInput) {
-        // Mettre à jour l'affichage du taux initial
-        const depotRateEl = document.getElementById('depotRateDisplay');
-        if (depotRateEl) depotRateEl.textContent = `Taux: 1 ${crypto} ≈ ${Math.round(getDepotRate(crypto)).toLocaleString()} MGA`;
-
-        amountInput.addEventListener('input', () => {
-          const amount = parseFloat(amountInput.value) || 0;
-          const liveRate = getDepotRate(crypto);
-          const networkVal = document.getElementById('depotNetwork') ? document.getElementById('depotNetwork').value : '';
-          // Mettre à jour le taux affiché en temps réel
-          if (depotRateEl) depotRateEl.textContent = 'Taux: 1 ' + crypto + ' ≈ ' + Math.round(liveRate).toLocaleString() + ' MGA';
-          if (amount >= 4000) {
-            // Choisir le bon nombre de décimales selon la valeur
-            const rawConverted = amount / liveRate;
-            let decimals = 6;
-            if (rawConverted >= 1) decimals = 4;
-            if (rawConverted >= 100) decimals = 2;
-            const converted = rawConverted.toFixed(decimals);
-            convertedAmountEl.textContent = converted + ' ' + crypto;
-            conversionDisplay.style.display = 'block';
-            // Afficher les frais réseau Binance
-            const feeMGA = networkVal ? getBinanceFeeMGA(crypto, networkVal) : null;
-            const feeCrypto = networkVal ? getBinanceFee(crypto, networkVal) : null;
-            var feesEl = document.getElementById('depotNetworkFees');
-            if (!feesEl) {
-              feesEl = document.createElement('div');
-              feesEl.id = 'depotNetworkFees';
-              feesEl.style.cssText = 'margin-top:8px;padding:10px 14px;background:rgba(245,158,11,0.1);border:1.5px solid rgba(245,158,11,0.3);border-radius:10px;font-size:12px;';
-              conversionDisplay.parentNode.insertBefore(feesEl, conversionDisplay.nextSibling);
-            }
-            if (feeCrypto !== null && networkVal) {
-              feesEl.style.display = 'block';
-              feesEl.innerHTML = '';
-              var feeRow = document.createElement('div');
-              feeRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:8px;';
-              var feeLabel = document.createElement('span');
-              feeLabel.style.color = 'var(--text-muted)';
-              var shortNet = networkVal.replace('BNB Smart Chain BEP20', 'BSC').replace('Bitcoin Cash', 'BCH').replace('-(', ' ').replace(')', '').replace('-', ' ');
-              feeLabel.textContent = 'Frais reseau (' + shortNet + ') :';
-              var feeVal = document.createElement('span');
-              feeVal.style.cssText = 'font-weight:800;color:#f59e0b;font-family:JetBrains Mono,monospace;text-align:right;';
-              var feeMain = document.createElement('div');
-              var feeDisplay = feeCrypto < 0.001 ? feeCrypto.toFixed(6) : feeCrypto < 1 ? feeCrypto.toFixed(4) : feeCrypto.toFixed(2);
-              feeMain.textContent = feeDisplay + ' ' + crypto;
-              var feeSub = document.createElement('div');
-              feeSub.style.cssText = 'font-size:10px;color:var(--text-muted);';
-              feeSub.textContent = '≈ ' + (feeMGA||0).toLocaleString() + ' MGA';
-              feeVal.appendChild(feeMain);
-              feeVal.appendChild(feeSub);
-              feeRow.appendChild(feeLabel);
-              feeRow.appendChild(feeVal);
-              feesEl.appendChild(feeRow);
-            } else {
-              feesEl.style.display = 'none';
-            }
-          } else {
-            conversionDisplay.style.display = 'none';
-            var feesEl2 = document.getElementById('depotNetworkFees');
-            if (feesEl2) feesEl2.style.display = 'none';
-          }
-        });
-      }
-
-      // Network dropdown functionality
-      const networkBtn = document.getElementById('networkDropdownBtn');
-      const networkDropdown = document.getElementById('networkDropdown');
-      const selectedNetworkText = document.getElementById('selectedNetworkText');
-      const depotNetworkInput = document.getElementById('depotNetwork');
-
-      if (networkBtn && networkDropdown) {
-        networkBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const isOpen = networkDropdown.style.display === 'block';
-          networkDropdown.style.display = isOpen ? 'none' : 'block';
-          networkBtn.style.borderColor = isOpen ? '' : '#10b981';
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!e.target.closest('#networkSelector')) {
-            networkDropdown.style.display = 'none';
-            networkBtn.style.borderColor = '';
-          }
-        });
-
-        // Network option selection
-        document.querySelectorAll('.network-option').forEach(option => {
-          option.addEventListener('mouseenter', () => {
-            option.style.background = 'var(--glass-1)';
-          });
-          option.addEventListener('mouseleave', () => {
-            option.style.background = '';
-          });
-          option.addEventListener('click', () => {
-            const network = option.getAttribute('data-network');
-            selectedNetworkText.textContent = network;
-            depotNetworkInput.value = network;
-            // Re-valider l'adresse déjà saisie si présente
-            var currentAddr = document.getElementById('depotCryptoAddress');
-            if (currentAddr && currentAddr.value) { checkAddressLive(currentAddr.value); }
-            // Mettre à jour les frais quand réseau change
-            var amtEl = document.getElementById('depotAmountAriary');
-            if (amtEl && parseFloat(amtEl.value) > 0) { amtEl.dispatchEvent(new Event('input')); }
-            networkDropdown.style.display = 'none';
-            networkBtn.style.borderColor = '#10b981';
-            networkBtn.style.background = 'rgba(16, 185, 129, 0.1)';
-          });
-        });
-      }
-
-      // Add hover effects for payment buttons
-      document.querySelectorAll('.depot-payment-btn').forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-          btn.style.transform = 'translateY(-2px)';
-          btn.style.filter = 'brightness(1.1)';
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = '';
-          btn.style.filter = '';
-        });
-      });
-    }
-
-    // Handle crypto item clicks in depot detail
-    document.addEventListener('click', function(e) {
-      const cryptoItem = e.target.closest('.depot-crypto-item');
-      if (cryptoItem) {
-        const crypto = cryptoItem.getAttribute('data-crypto');
-        if (crypto) {
-          showCryptoDepotForm(crypto);
-        }
-      }
-
-      // Handle payment button clicks
-      const paymentBtn = e.target.closest('.depot-payment-btn');
-      if (paymentBtn) {
-        const payment = paymentBtn.getAttribute('data-payment');
-        const amount = document.getElementById('depotAmountAriary')?.value;
-        const address = document.getElementById('depotCryptoAddress')?.value;
-        const network = document.getElementById('depotNetwork')?.value;
-
-        if (!amount || amount <= 0) {
-          showCustomAlert('Veuillez entrer un montant valide en Ariary.');
-          return;
-        }
-
-        // Minimum deposit validation
-        if (Number(amount) < 4000) {
-          showCustomAlert('Le montant minimum de dépôt est de 4 000 Ariary.');
-          return;
-        }
-
-        if (!address || address.trim() === '') {
-          showCustomAlert('Veuillez entrer votre adresse crypto.');
-          return;
-        }
-
-        if (!network || network.trim() === '') {
-          showCustomAlert('Veuillez sélectionner un réseau.');
-          return;
-        }
-
-        // Valider adresse vs réseau
-        const addrValidation = validateAddressForNetwork(address, network);
-        if (!addrValidation.valid) {
-          showAddressNetworkError(address, network);
-          // Signaler visuellement l'input
-          const addrInput = document.getElementById('depotCryptoAddress');
-          if (addrInput) {
-            addrInput.style.borderColor = '#ef4444';
-            addrInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.3)';
-            setTimeout(() => { addrInput.style.borderColor = ''; addrInput.style.boxShadow = ''; }, 3000);
-          }
-          return;
-        }
-
-        // Calculate converted amount
-        const convertedCrypto = convertMGAToCrypto(Number(amount), currentDepotCrypto);
-
-        // Show confirmation with payment info
-        let paymentName = '';
-        let paymentNumber = '';
-        let accountName = '';
-        let ussdCode = '';
-        if (payment === 'orange') {
-          paymentName = 'Orange Money';
-          paymentNumber = '032 46 510 97';
-          accountName = 'Kevin Ameros';
-          ussdCode = '144*11*0324651097*0324651097*' + amount + '*2#';
-        } else if (payment === 'mvola') {
-          paymentName = 'MVola';
-          paymentNumber = '034 85 036 47';
-          accountName = 'Kevin Ameros';
-          ussdCode = '111*1*2*0348503647*' + amount + '*2*55#';
-        } else if (payment === 'airtel') {
-          paymentName = 'Airtel Money';
-          paymentNumber = '033 70 518 26';
-          accountName = 'Kevin Ameros';
-          ussdCode = '*436*2*1*1*0337051826*' + amount + '*2#';
-        }
-
-        showDepotConfirmation(currentDepotCrypto, amount, address, paymentName, paymentNumber, accountName, network, convertedCrypto, ussdCode);
-      }
-    });
-
-    // ========== VALIDATION ADRESSE / RÉSEAU ==========
-    // Patterns d'adresses par réseau
+    // ========== RÈGLES DE VALIDATION D'ADRESSES PAR RÉSEAU ==========
     const networkAddressRules = {
-      'TRC20':               { pattern: /^T[1-9A-HJ-NP-Za-km-z]{33}$/, example: 'T...  (34 caractères, commence par T)', name: 'TRON (TRC20)' },
-      'BSC (BNB Smart Chain BEP20)': { pattern: /^0x[0-9a-fA-F]{40}$/, example: '0x... (42 caractères)', name: 'BSC/BEP20' },
-      'LTC-(Litecoin)':      { pattern: /^(L[a-km-zA-HJ-NP-Z1-9]{26,33}|M[a-km-zA-HJ-NP-Z1-9]{26,33}|ltc1[a-z0-9]{6,87})$/, example: 'L..., M... ou ltc1...', name: 'Litecoin' },
-      'POL-(POLYGON)':       { pattern: /^0x[0-9a-fA-F]{40}$/, example: '0x... (42 caractères)', name: 'Polygon (POL)' },
-      'SOL-(SOLANA)':        { pattern: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/, example: 'Adresse Base58, 32-44 caractères', name: 'Solana' },
-      'DOGECOIN':            { pattern: /^D[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}$/, example: 'D... (34 caractères)', name: 'Dogecoin' },
-      'XRB':                 { pattern: /^r[0-9a-zA-Z]{24,34}$/, example: 'r... (25-35 caractères)', name: 'XRP' },
-      'XRP':                 { pattern: /^r[0-9a-zA-Z]{24,34}$/, example: 'r... (25-35 caractères)', name: 'XRP' },
-      'TONCoin':             { pattern: /^(EQ|UQ)[A-Za-z0-9_-]{46}$/, example: 'EQ... ou UQ... (48 caractères)', name: 'TON' },
-      'BCH-(Bitcoin Cash)':  { pattern: /^(bitcoincash:)?(q|p)[a-z0-9]{41}$|^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/, example: 'bitcoincash:q... ou 1.../3...', name: 'Bitcoin Cash' },
-      'SUI-(SUIcoin)':       { pattern: /^0x[0-9a-fA-F]{64}$/, example: '0x... (66 caractères)', name: 'SUI' },
-      'ARB-(ARBITRUM)':      { pattern: /^0x[0-9a-fA-F]{40}$/, example: '0x... (42 caractères)', name: 'Arbitrum' }
+      'TRC20':                        { pattern: /^T[1-9A-HJ-NP-Za-km-z]{33}$/, example: 'T... (34 caractères, commence par T)', name: 'TRON (TRC20)' },
+      'BSC (BNB Smart Chain BEP20)':  { pattern: /^0x[0-9a-fA-F]{40}$/, example: '0x... (42 caractères)', name: 'BSC/BEP20' },
+      'LTC-(Litecoin)':               { pattern: /^(L[a-km-zA-HJ-NP-Z1-9]{26,33}|M[a-km-zA-HJ-NP-Z1-9]{26,33}|ltc1[a-z0-9]{6,87})$/, example: 'L..., M... ou ltc1...', name: 'Litecoin' },
+      'POL-(POLYGON)':                { pattern: /^0x[0-9a-fA-F]{40}$/, example: '0x... (42 caractères)', name: 'Polygon (POL)' },
+      'SOL-(SOLANA)':                 { pattern: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/, example: 'Base58, 32-44 caractères', name: 'Solana' },
+      'DOGECOIN':                     { pattern: /^D[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}$/, example: 'D... (34 caractères)', name: 'Dogecoin' },
+      'XRB':                          { pattern: /^r[0-9a-zA-Z]{24,34}$/, example: 'r... (25-35 caractères)', name: 'XRP' },
+      'XRP':                          { pattern: /^r[0-9a-zA-Z]{24,34}$/, example: 'r... (25-35 caractères)', name: 'XRP' },
+      'TONCoin':                      { pattern: /^(EQ|UQ)[A-Za-z0-9_-]{46}$/, example: 'EQ... ou UQ... (48 caractères)', name: 'TON' },
+      'BCH-(Bitcoin Cash)':           { pattern: /^(bitcoincash:)?(q|p)[a-z0-9]{41}$|^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/, example: 'bitcoincash:q... ou 1.../3...', name: 'Bitcoin Cash' },
+      'SUI-(SUIcoin)':                { pattern: /^0x[0-9a-fA-F]{64}$/, example: '0x... (66 caractères)', name: 'SUI' },
+      'ARB-(ARBITRUM)':               { pattern: /^0x[0-9a-fA-F]{40}$/, example: '0x... (42 caractères)', name: 'Arbitrum' }
     };
 
     function validateAddressForNetwork(address, network) {
@@ -7073,10 +7245,10 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
             <span style="color: var(--text-muted); font-size: 14px;">Paiement</span>
             <span style="color: var(--text-primary); font-weight: 600;">${paymentName}</span>
           </div>
-          <div style="margin-bottom: 0;">
-            <span style="color: var(--text-muted); font-size: 14px; display: block; margin-bottom: 6px;">Adresse ${crypto}</span>
+          ${address ? `<div style="margin-bottom: 0;">
+            <span style="color: var(--text-muted); font-size: 14px; display: block; margin-bottom: 6px;">${address.includes('@') || /^\d+$/.test(address) ? '🪪 ID / Email portefeuille' : '🔗 Adresse ' + crypto}</span>
             <span style="color: var(--accent-secondary); font-size: 12px; font-family: 'JetBrains Mono', monospace; word-break: break-all; display: block; background: var(--glass-2); padding: 10px; border-radius: 8px;">${address}</span>
-          </div>
+          </div>` : ''}
         </div>
 
         <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); border: 2px solid #10b981; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px;">
@@ -7122,12 +7294,15 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
         if (ussdBlock && ussdDisplay) {
           ussdDisplay.textContent = ussdCode;
           ussdBlock.style.display = 'block';
-          copyUssdBtn.addEventListener('click', function() {
-            navigator.clipboard.writeText(ussdCode).then(function() {
-              copyUssdBtn.textContent = '✅';
-              setTimeout(function() { copyUssdBtn.textContent = '⧉'; }, 1500);
+          if (copyUssdBtn) {
+            copyUssdBtn.addEventListener('click', function() {
+              copyToClipboard(ussdCode, function() {
+                copyUssdBtn.textContent = '✅';
+                showToast('📋 Code USSD copié !', '#10b981');
+                setTimeout(function() { copyUssdBtn.textContent = '⧉'; }, 1500);
+              });
             });
-          });
+          }
         }
       }
 
@@ -7220,71 +7395,77 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       showCustomAlert(msg);
     }
 
-    $('depotMainBtn').addEventListener('click', () => {
+    on('depotMainBtn', 'click', () => {
       if (!checkServiceHours()) { showClosedAlert('Service Dépôt'); return; }
       $('depotModal').classList.add('open');
     });
 
     // Retrait Main Button
-    $('retraitMainBtn').addEventListener('click', () => {
+    on('retraitMainBtn', 'click', () => {
       if (!checkServiceHours()) { showClosedAlert('Service Retrait'); return; }
       populateRetraitCryptoList();
       $('retraitModal').classList.add('open');
     });
 
     // Close Depot Modal
-    $('closeDepotModal').addEventListener('click', () => {
+    on('closeDepotModal', 'click', () => {
       $('depotModal').classList.remove('open');
+      _depotInputListenerAttached = false;
     });
-    $('depotModal').addEventListener('click', (e) => {
+    on('depotModal', 'click', (e) => {
       if (e.target === $('depotModal')) {
         $('depotModal').classList.remove('open');
       }
     });
 
     // Close Depot Detail Modal
-    $('closeDepotDetailModal').addEventListener('click', () => {
+    on('closeDepotDetailModal', 'click', () => {
       $('depotDetailModal').classList.remove('open');
     });
-    $('backToDepotList').addEventListener('click', () => {
+    on('backToDepotList', 'click', () => {
       $('depotDetailModal').classList.remove('open');
       $('depotModal').classList.add('open');
     });
-    $('depotDetailModal').addEventListener('click', (e) => {
+    on('depotDetailModal', 'click', (e) => {
       if (e.target === $('depotDetailModal')) {
         $('depotDetailModal').classList.remove('open');
       }
     });
 
     // Close Retrait Modal
-    $('closeRetraitModal').addEventListener('click', () => {
+    on('closeRetraitModal', 'click', () => {
       $('retraitModal').classList.remove('open');
     });
-    $('retraitModal').addEventListener('click', (e) => {
+    on('retraitModal', 'click', (e) => {
       if (e.target === $('retraitModal')) {
         $('retraitModal').classList.remove('open');
       }
     });
 
     // Close Retrait Detail Modal
-    $('closeRetraitDetailModal').addEventListener('click', () => {
+    on('closeRetraitDetailModal', 'click', () => {
       $('retraitDetailModal').classList.remove('open');
     });
-    $('backToRetraitList').addEventListener('click', () => {
+    on('backToRetraitList', 'click', () => {
       $('retraitDetailModal').classList.remove('open');
       $('retraitModal').classList.add('open');
+      // Restore wallet grid view
+      var grid = document.getElementById('retraitWalletGrid');
+      var section = document.getElementById('retraitCryptoSection');
+      if (grid) grid.style.display = 'grid';
+      if (section) section.style.display = 'none';
     });
-    $('retraitDetailModal').addEventListener('click', (e) => {
+    on('retraitDetailModal', 'click', (e) => {
       if (e.target === $('retraitDetailModal')) {
         $('retraitDetailModal').classList.remove('open');
       }
     });
 
     // Close Retrait Confirm Modal
-    $('closeRetraitConfirmModal').addEventListener('click', () => {
+    on('closeRetraitConfirmModal', 'click', () => {
       $('retraitConfirmModal').classList.remove('open');
     });
-    $('retraitConfirmModal').addEventListener('click', (e) => {
+    on('retraitConfirmModal', 'click', (e) => {
       if (e.target === $('retraitConfirmModal')) {
         $('retraitConfirmModal').classList.remove('open');
       }
@@ -7388,198 +7569,371 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     let currentRetraitCrypto = null;
 
     // Populate retrait crypto list when modal opens
+    // Wallet config for display
+    const retraitWalletDisplay = [
+      { key: 'Site Web',      name: 'Site Web',      icon: '🌐', color: '#6366f1', sub: '12 cryptos' },
+      { key: 'Trust Wallet',  name: 'Trust Wallet',  icon: 'TW', color: '#0500ff', sub: '12 cryptos', logo: 'https://pfst.cf2.poecdn.net/base/image/2f783c52b6a9a9096ee97b21d7cece1ccc226f8311ac5881f809b57900a62db4?w=151&h=170' },
+      { key: 'BINANCE',       name: 'BINANCE',       icon: 'B',  color: '#f3ba2f', sub: 'Email / ID', logo: 'https://pfst.cf2.poecdn.net/base/image/92033d9683f1d726c267b19d54c0b37c1d82ff332ce06e3085a8262acba8abad?w=143&h=144' },
+      { key: 'OKX',           name: 'OKX',           icon: 'O',  color: '#111',    sub: 'Email' },
+      { key: 'MEXC',          name: 'MEXC',          icon: 'M',  color: '#2354e6', sub: 'Email' },
+      { key: 'BYBIT',         name: 'BYBIT',         icon: 'BY', color: '#f7a600', sub: 'Email' },
+      { key: 'Redotpay',      name: 'Redotpay',      icon: 'R',  color: '#e4002b', sub: 'Email' },
+    ];
+
     function populateRetraitCryptoList() {
-      const container = $('retraitCryptoList');
-      container.innerHTML = retraitCryptos.map(crypto => {
-        const style = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
-        return `
-          <div class="retrait-crypto-item" data-crypto="${crypto}" style="background: var(--glass-1); border: 2px solid var(--border); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; transition: all 0.3s ease; cursor: pointer;">
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, ${style.color}, ${style.color}cc); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <span style="font-weight: 800; font-size: 16px; color: white;">${style.icon}</span>
-            </div>
-            <span style="font-size: 15px; font-weight: 700; color: var(--text-primary);">${crypto}</span>
-            <span style="margin-left: auto; font-size: 18px; color: var(--text-muted);">→</span>
-          </div>
-        `;
+      // Build wallet grid
+      var grid = document.getElementById('retraitWalletGrid');
+      if (!grid) return;
+      // Style liste comme depot (crypto-option)
+      grid.style.display = 'block';
+      grid.innerHTML = retraitWalletDisplay.map(function(w) {
+        var cryptoCount = (retraitWallets[w.key] && retraitWallets[w.key].addresses)
+          ? Object.keys(retraitWallets[w.key].addresses).length
+          : retraitCryptos.length;
+        var logoHtml = w.logo
+          ? '<div class="crypto-icon" style="padding:6px;"><img src="' + w.logo + '" alt="' + w.name + '" style="width:100%;height:100%;object-fit:contain;"></div>'
+          : '<div class="crypto-icon" style="background:linear-gradient(135deg,' + w.color + ',' + w.color + 'aa);"><span style="font-weight:800;font-size:15px;color:#fff;">' + w.icon + '</span></div>';
+        return '<div class="crypto-option retrait-wallet-card" data-wallet="' + w.key + '" style="cursor:pointer;">'
+          + logoHtml
+          + '<div class="crypto-info">'
+          + '<span class="crypto-name">' + w.name + '</span>'
+          + '<span class="crypto-email">' + cryptoCount + ' cryptos disponibles</span>'
+          + '</div>'
+          + '</div>';
       }).join('');
 
-      // Add hover effects
-      container.querySelectorAll('.retrait-crypto-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-          item.style.borderColor = '#f59e0b';
-          item.style.transform = 'translateX(4px)';
-          item.style.boxShadow = '0 4px 16px rgba(245, 158, 11, 0.3)';
-        });
-        item.addEventListener('mouseleave', () => {
-          item.style.borderColor = '';
-          item.style.transform = '';
-          item.style.boxShadow = '';
+      // Wallet card click → show crypto list
+      grid.querySelectorAll('.retrait-wallet-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+          var walletKey = card.getAttribute('data-wallet');
+          var wConfig = retraitWalletDisplay.find(function(w) { return w.key === walletKey; });
+          // Highlight selected
+          grid.querySelectorAll('.retrait-wallet-card').forEach(function(c) {
+            c.style.borderColor = ''; c.style.boxShadow = '';
+          });
+          card.style.borderColor = '#f59e0b';
+          card.style.boxShadow = '0 4px 16px rgba(245,158,11,0.3)';
+          // Show crypto section
+          var section = document.getElementById('retraitCryptoSection');
+          var walletInfo = document.getElementById('retraitWalletInfo');
+          var logoH = wConfig && wConfig.logo
+            ? '<img src="' + wConfig.logo + '" style="width:32px;height:32px;border-radius:8px;object-fit:contain;">'
+            : '<div style="width:32px;height:32px;border-radius:8px;background:' + (wConfig ? wConfig.color : '#888') + ';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;">' + (wConfig ? wConfig.icon : '?') + '</div>';
+          if (walletInfo) walletInfo.innerHTML = logoH + '<div style="margin-left:8px;"><div style="font-size:15px;font-weight:700;">' + walletKey + '</div><div style="font-size:11px;color:var(--text-muted);">Choisir la crypto</div></div>';
+          grid.style.display = 'none';
+          if (section) section.style.display = 'block';
+          // Fill crypto list for this wallet
+          var container = $('retraitCryptoList');
+          var walletConfig = retraitWallets[walletKey] || {};
+          var availCryptos = walletConfig.addresses ? Object.keys(walletConfig.addresses) : retraitCryptos;
+          if (!walletConfig.addresses) availCryptos = retraitCryptos;
+          container.innerHTML = availCryptos.map(function(crypto) {
+            var cs = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
+            var liveRate = getRetraitRate(crypto);
+            return '<div class="retrait-crypto-item" data-crypto="' + crypto + '" data-wallet="' + walletKey + '" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:all 0.2s;">'
+              + '<div style="width:42px;height:42px;border-radius:50%;background:' + cs.color + '22;border:2.5px solid ' + cs.color + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+              + '<span style="font-weight:800;font-size:18px;color:' + cs.color + ';">' + cs.icon + '</span></div>'
+              + '<div style="flex:1;text-align:left;">'
+              + '<div style="font-size:15px;font-weight:800;color:var(--text-primary);">' + crypto + '</div>'
+              + '<div style="font-size:11px;color:var(--text-muted);">1 ' + crypto + ' = ' + Math.round(liveRate).toLocaleString() + ' MGA</div>'
+              + '</div>'
+              + '<span style="font-size:20px;color:var(--text-muted);">›</span>'
+              + '</div>';
+          }).join('');
         });
       });
     }
 
     // Show retrait form for selected crypto
     function showRetraitForm(crypto) {
-      const style = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
+      var cs = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
       currentRetraitCrypto = crypto;
-      const rate = getRetraitRate(crypto);
+      var rate = getRetraitRate(crypto);
 
-      const content = `
-        <div style="margin-bottom: 24px;">
-          <div style="width: 70px; height: 70px; border-radius: 18px; background: linear-gradient(135deg, ${style.color}, ${style.color}cc); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 24px ${style.color}66;">
-            <span style="font-weight: 800; font-size: 28px; color: white;">${style.icon}</span>
-          </div>
-          <h3 style="font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Retrait ${crypto}</h3>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Entrez le montant à retirer</p>
-        </div>
+      function buildWalletCards() {
+        var cards = '';
+        Object.entries(retraitWallets).forEach(function(entry) {
+          var walletName = entry[0];
+          var wConfig = entry[1];
+          var isExchange = !!(wConfig.email || wConfig.id);
+          var logoHtml = wConfig.logo
+            ? '<img src="' + wConfig.logo + '" style="width:38px;height:38px;border-radius:10px;object-fit:contain;flex-shrink:0;">'
+            : '<div style="width:38px;height:38px;border-radius:10px;background:' + wConfig.color + ';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;">' + wConfig.icon + '</div>';
+          var credHtml = '';
+          if (isExchange) {
+            if (wConfig.id) {
+              credHtml += '<div style="margin-top:8px;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;">'
+                + '<span style="font-size:11px;color:var(--text-muted);">ID / Email :</span>'
+                + '<div style="display:flex;align-items:center;gap:6px;">'
+                + '<code style="font-size:11px;font-weight:700;color:#f59e0b;font-family:JetBrains Mono,monospace;">' + wConfig.id + '</code>'
+                + '<button class="retrait-copy-cred" data-copy="' + wConfig.id + '" style="background:rgba(245,158,11,0.15);border:1px solid #f59e0b;color:#f59e0b;padding:3px 7px;border-radius:6px;font-size:12px;cursor:pointer;">&#9647;</button>'
+                + '</div></div>';
+            }
+            if (wConfig.email && wConfig.email !== wConfig.id) {
+              credHtml += '<div style="margin-top:6px;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;">'
+                + '<span style="font-size:11px;color:var(--text-muted);">Email :</span>'
+                + '<div style="display:flex;align-items:center;gap:6px;">'
+                + '<code style="font-size:11px;font-weight:700;color:#f59e0b;font-family:JetBrains Mono,monospace;">' + wConfig.email + '</code>'
+                + '<button class="retrait-copy-cred" data-copy="' + wConfig.email + '" style="background:rgba(245,158,11,0.15);border:1px solid #f59e0b;color:#f59e0b;padding:3px 7px;border-radius:6px;font-size:12px;cursor:pointer;">&#9647;</button>'
+                + '</div></div>';
+            }
+          } else if (wConfig.addresses && wConfig.addresses[crypto]) {
+            var addr = wConfig.addresses[crypto];
+            var net = cryptoNetworks[crypto] || '';
+            credHtml += '<div style="margin-top:8px;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:8px;">'
+              + '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px;">'
+              + '<span style="font-size:11px;color:var(--text-muted);">Adresse ' + crypto + ' :</span>'
+              + '<button class="retrait-copy-cred" data-copy="' + addr + '" style="background:rgba(16,185,129,0.15);border:1px solid #10b981;color:#10b981;padding:3px 7px;border-radius:6px;font-size:12px;cursor:pointer;">&#9647;</button>'
+              + '</div>'
+              + '<code style="font-size:10px;font-weight:700;color:#10b981;font-family:JetBrains Mono,monospace;word-break:break-all;display:block;">' + addr + '</code>'
+              + (net ? '<div style="margin-top:4px;"><span style="font-size:10px;font-weight:700;color:#6366f1;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);padding:2px 8px;border-radius:10px;">🌐 ' + net + '</span></div>' : '')
+              + '</div>';
+          }
+          var safeKey = walletName.replace(/[^a-zA-Z0-9]/g, '_');
+          cards += '<div class="retrait-wallet-select-card" data-wallet="' + walletName + '" style="background:var(--glass-1);border:2px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer;transition:all 0.25s;">'
+            + '<div style="display:flex;align-items:center;gap:12px;">'
+            + logoHtml
+            + '<div style="flex:1;"><div style="font-size:15px;font-weight:800;color:var(--text-primary);">' + walletName + '</div>'
+            + '<div style="font-size:11px;color:var(--text-muted);">' + (isExchange ? 'Transfert via exchange' : 'Transfert direct') + '</div></div>'
+            + '<div class="wallet-arrow-' + safeKey + '" style="font-size:18px;color:var(--text-muted);transition:transform 0.3s;">▼</div>'
+            + '</div>'
+            + '<div class="wallet-detail-panel" style="display:none;margin-top:10px;border-top:1px solid var(--border);padding-top:10px;">'
+            + credHtml
+            + '</div></div>';
+        });
+        return cards;
+      }
 
-        <!-- Crypto Amount Input -->
-        <div style="background: var(--glass-1); border: 2px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: left;">
-          <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 8px;">💰 Montant en ${crypto}</label>
-          <div style="position: relative;">
-            <input type="number" id="retraitCryptoAmount" placeholder="0.00" step="0.000001" min="0" style="width: 100%; padding: 14px 60px 14px 16px; font-size: 18px; font-weight: 700; font-family: 'JetBrains Mono', monospace; background: var(--bg-secondary); border: 2px solid var(--border); border-radius: 10px; color: var(--text-primary); outline: none; transition: all 0.3s ease;">
-            <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 700; color: var(--text-muted);">${crypto}</span>
-          </div>
-        </div>
+      var netRowsHtml = '<div class=\"retrait-network-option\" data-net=\"TRC20\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">⚡</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">TRC20</span></div><div class=\"retrait-network-option\" data-net=\"BSC (BNB Smart Chain BEP20)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🔶</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">BSC (BNB Smart Chain BEP20)</span></div><div class=\"retrait-network-option\" data-net=\"LTC-(Litecoin)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🥈</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">LTC-(Litecoin)</span></div><div class=\"retrait-network-option\" data-net=\"POL-(POLYGON)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🟣</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">POL-(POLYGON)</span></div><div class=\"retrait-network-option\" data-net=\"SOL-(SOLANA)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🌞</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">SOL-(SOLANA)</span></div><div class=\"retrait-network-option\" data-net=\"DOGECOIN\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🐕</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">DOGECOIN</span></div><div class=\"retrait-network-option\" data-net=\"XRB\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">✖️</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">XRB</span></div><div class=\"retrait-network-option\" data-net=\"TONCoin\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">💎</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">TONCoin</span></div><div class=\"retrait-network-option\" data-net=\"XRP\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🔷</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">XRP</span></div><div class=\"retrait-network-option\" data-net=\"BCH-(Bitcoin Cash)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">💚</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">BCH-(Bitcoin Cash)</span></div><div class=\"retrait-network-option\" data-net=\"SUI-(SUIcoin)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;\"><span style=\"font-size:16px;\">🌊</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">SUI-(SUIcoin)</span></div><div class=\"retrait-network-option\" data-net=\"ARB-(ARBITRUM)\" onclick=\"selectRetraitNetwork(this.getAttribute(&quot;data-net&quot;))\" style=\"padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;\"><span style=\"font-size:16px;\">🔵</span><span style=\"font-size:13px;font-weight:600;color:var(--text-primary);\">ARB-(ARBITRUM)</span></div>';
 
-        <!-- Badge taux live retrait -->
-        <div style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 6px;">
-          <span class="rates-live-badge" style="font-size: 11px; font-weight: 600; color: #10b981;">🟢 Chargement des taux...</span>
-        </div>
+      var html = ''
+        + '<div style="margin-bottom:20px;text-align:center;">'
+        + '<div style="width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,' + cs.color + ',' + cs.color + '99);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 8px 24px ' + cs.color + '55;">'
+        + '<span style="font-weight:800;font-size:30px;color:#fff;">' + cs.icon + '</span></div>'
+        + '<h3 style="font-size:22px;font-weight:800;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Retrait ' + crypto + '</h3>'
+        + '<p style="font-size:13px;color:var(--text-muted);margin-top:4px;">Taux retrait: 1 ' + crypto + ' = <strong style="color:#f59e0b;">' + Math.round(rate).toLocaleString() + ' MGA</strong></p>'
+        + '</div>'
+        + '<div style="background:var(--glass-1);border:2px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px;text-align:left;">'
+        + '<label style="font-size:13px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:8px;">💰 Montant à retirer</label>'
+        + '<div style="position:relative;">'
+        + '<input type="number" id="retraitCryptoAmount" placeholder="0.00" step="0.000001" min="0" style="width:100%;padding:14px 70px 14px 16px;font-size:20px;font-weight:800;font-family:JetBrains Mono,monospace;background:var(--bg-secondary);border:2px solid var(--border);border-radius:10px;color:var(--text-primary);outline:none;box-sizing:border-box;">'
+        + '<span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:800;color:#f59e0b;">' + crypto + '</span></div>'
+        + '<div id="retraitConversionZone" style="display:none;margin-top:10px;padding:10px 14px;background:rgba(245,158,11,0.1);border:1.5px solid rgba(245,158,11,0.3);border-radius:10px;flex-direction:row;align-items:center;justify-content:space-between;">'
+        + '<span style="font-size:12px;color:var(--text-muted);">💵 Équivalent MGA :</span>'
+        + '<span id="retraitConversionValue" style="font-size:16px;font-weight:800;color:#f59e0b;font-family:JetBrains Mono,monospace;">0 MGA</span></div>'
+        + '<p id="retraitRateDisplay" style="font-size:11px;color:var(--text-muted);margin-top:6px;text-align:right;">Taux: 1 ' + crypto + ' = ' + Math.round(rate).toLocaleString() + ' MGA</p>'
+        + '<span class="rates-live-badge" style="font-size:11px;font-weight:600;color:#10b981;float:right;">🟢 Taux...</span></div>'
+        + '<div style="margin-bottom:14px;"><p style="font-size:13px;font-weight:700;color:var(--text-muted);margin-bottom:10px;">👛 Sélectionnez votre portefeuille :</p>'
+        + '<div id="retraitWalletCards">' + buildWalletCards() + '</div></div>'
+        + '<div style="margin-bottom:14px;">'
+        + '<button id="selectRetraitNetworkBtn" onclick="toggleRetraitNetworkPanel()" style="width:100%;padding:13px 16px;font-size:14px;font-weight:700;background:linear-gradient(135deg,#6366f1,#4f46e5);border:none;border-radius:12px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s;">'
+        + '<span style="display:flex;align-items:center;gap:8px;">🌐 <span id="retraitNetworkLabel">Choisir le Réseau</span></span>'
+        + '<span id="retraitNetworkArrow" style="transition:transform 0.3s;">▼</span></button>'
+        + '<div id="retraitNetworkPanel" style="display:none;margin-top:6px;background:var(--glass-1);border:2px solid rgba(99,102,241,0.3);border-radius:12px;overflow:hidden;">'
+        + netRowsHtml
+        + '</div>'
+        + '<input type="hidden" id="retraitNetworkValue" value="">'
+        + '<div id="retraitNetworkAddressZone"></div></div>'
+        + '<div id="retraitWalletInfoZone" style="display:none;background:var(--glass-1);border:2px solid #10b981;border-radius:14px;padding:16px;margin-bottom:14px;animation:fadeSlideIn 0.3s ease;"></div>'
+        + '<div id="simCardInfoZone" style="background:var(--glass-1);border:2px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;text-align:left;">'
+        + '<p style="font-size:13px;font-weight:700;color:var(--text-muted);margin-bottom:12px;">📱 Infos de paiement mobile</p>'
+        + '<div style="display:grid;gap:12px;">'
+        + '<div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;">Numéro de téléphone</label>'
+        + '<input type="tel" id="retraitPhoneNumber" placeholder="Ex: 032 XX XXX XX" style="width:100%;padding:12px 14px;font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;background:var(--bg-secondary);border:2px solid var(--border);border-radius:10px;color:var(--text-primary);outline:none;box-sizing:border-box;"></div>'
+        + '<div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;">Nom sur la puce</label>'
+        + '<input type="text" id="retraitSimName" placeholder="Ex: RAKOTO Jean" style="width:100%;padding:12px 14px;font-size:16px;font-weight:600;background:var(--bg-secondary);border:2px solid var(--border);border-radius:10px;color:var(--text-primary);outline:none;box-sizing:border-box;"></div></div></div>'
+        + '<button id="confirmRetraitBtn" style="width:100%;padding:16px;background:linear-gradient(135deg,#10b981,#059669);border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.4);">✅ Confirmer le retrait</button>';
 
-        <!-- Ariary Conversion Display -->
-        <div id="retraitConversionZone" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1)); border: 2px solid rgba(245, 158, 11, 0.3); border-radius: 14px; padding: 16px; margin-bottom: 16px; display: none;">
-          <div style="display: flex; align-items: center; justify-content: space-between;">
-            <span style="font-size: 13px; color: var(--text-muted);">💵 Équivalent en Ariary:</span>
-            <span id="retraitConversionValue" style="font-size: 18px; font-weight: 800; color: #f59e0b; font-family: 'JetBrains Mono', monospace;">0 MGA</span>
-          </div>
-          <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px; text-align: center;" id="retraitRateDisplay">Taux: 1 ${crypto} = ${Math.round(getRetraitRate(crypto)).toLocaleString()} MGA</p>
-        </div>
-
-        <!-- Wallet Selection Button -->
-        <div style="margin-top: 20px;">
-          <button id="selectWalletBtn" style="width: 100%; padding: 16px; font-size: 15px; font-weight: 700; font-family: 'Sora', sans-serif; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 12px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);">
-            <span style="font-size: 20px;">👛</span> Choisir le Portefeuille
-          </button>
-        </div>
-
-        <!-- Network Selection Button -->
-        <div style="margin-top: 12px;">
-          <button id="selectRetraitNetworkBtn" onclick="toggleRetraitNetworkPanel()" style="width: 100%; padding: 14px 16px; font-size: 14px; font-weight: 700; font-family: 'Sora', sans-serif; background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; border-radius: 12px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(99,102,241,0.35);">
-            <span style="display:flex;align-items:center;gap:8px;"><span style="font-size: 18px;">🌐</span> <span id="retraitNetworkLabel">Choisir le Réseau</span></span>
-            <span id="retraitNetworkArrow" style="transition:transform 0.3s;">▼</span>
-          </button>
-          <!-- Panel réseaux -->
-          <div id="retraitNetworkPanel" style="display:none; margin-top:8px; background:var(--glass-1); border:2px solid rgba(99,102,241,0.3); border-radius:12px; overflow:hidden;">
-            <div class="retrait-network-option" data-net="TRC20" onclick="selectRetraitNetwork('TRC20')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">⚡</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">TRC20</span>
-            </div>
-            <div class="retrait-network-option" data-net="BSC (BNB Smart Chain BEP20)" onclick="selectRetraitNetwork('BSC (BNB Smart Chain BEP20)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🔶</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">BSC (BNB Smart Chain BEP20)</span>
-            </div>
-            <div class="retrait-network-option" data-net="LTC-(Litecoin)" onclick="selectRetraitNetwork('LTC-(Litecoin)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🥈</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">LTC-(Litecoin)</span>
-            </div>
-            <div class="retrait-network-option" data-net="POL-(POLYGON)" onclick="selectRetraitNetwork('POL-(POLYGON)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🟣</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">POL-(POLYGON)</span>
-            </div>
-            <div class="retrait-network-option" data-net="SOL-(SOLANA)" onclick="selectRetraitNetwork('SOL-(SOLANA)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🌞</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">SOL-(SOLANA)</span>
-            </div>
-            <div class="retrait-network-option" data-net="DOGECOIN" onclick="selectRetraitNetwork('DOGECOIN')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🐕</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">DOGECOIN</span>
-            </div>
-            <div class="retrait-network-option" data-net="XRB" onclick="selectRetraitNetwork('XRB')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">✖️</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">XRB</span>
-            </div>
-            <div class="retrait-network-option" data-net="TONCoin" onclick="selectRetraitNetwork('TONCoin')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">💎</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">TONCoin</span>
-            </div>
-            <div class="retrait-network-option" data-net="XRP" onclick="selectRetraitNetwork('XRP')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🔷</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">XRP</span>
-            </div>
-            <div class="retrait-network-option" data-net="BCH-(Bitcoin Cash)" onclick="selectRetraitNetwork('BCH-(Bitcoin Cash)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">💚</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">BCH-(Bitcoin Cash)</span>
-            </div>
-            <div class="retrait-network-option" data-net="SUI-(SUIcoin)" onclick="selectRetraitNetwork('SUI-(SUIcoin)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:all 0.2s;">
-              <span style="font-size:18px;">🌊</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">SUI-(SUIcoin)</span>
-            </div>
-            <div class="retrait-network-option" data-net="ARB-(ARBITRUM)" onclick="selectRetraitNetwork('ARB-(ARBITRUM)')" style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;">
-              <span style="font-size:18px;">🔵</span>
-              <span style="font-size:14px;font-weight:600;color:var(--text-primary);">ARB-(ARBITRUM)</span>
-            </div>
-          </div>
-          <input type="hidden" id="retraitNetworkValue" value="">
-        </div>
-
-        <!-- Phone/Name Input Zone -->
-        <div id="simCardInfoZone" style="margin-top: 16px; background: var(--glass-1); border: 2px solid var(--border); border-radius: 14px; padding: 16px; text-align: left;">
-          <p style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 18px;">📱</span> Informations de la puce
-          </p>
-          <div style="display: grid; gap: 12px;">
-            <div>
-              <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px;">Numéro de téléphone</label>
-              <input type="tel" id="retraitPhoneNumber" placeholder="Ex: 032 XX XXX XX" style="width: 100%; padding: 12px 14px; font-size: 16px; font-weight: 600; font-family: 'JetBrains Mono', monospace; background: var(--bg-secondary); border: 2px solid var(--border); border-radius: 10px; color: var(--text-primary); outline: none; transition: all 0.3s ease;">
-            </div>
-            <div>
-              <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px;">Nom écrit sur la puce</label>
-              <input type="text" id="retraitSimName" placeholder="Ex: RAKOTO Jean" style="width: 100%; padding: 12px 14px; font-size: 16px; font-weight: 600; font-family: 'Sora', sans-serif; background: var(--bg-secondary); border: 2px solid var(--border); border-radius: 10px; color: var(--text-primary); outline: none; transition: all 0.3s ease;">
-            </div>
-          </div>
-        </div>
-
-        <!-- Wallet Options (hidden by default) -->
-        <div id="walletOptionsContainer" style="display: none; margin-top: 16px;">
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Sélectionnez votre portefeuille:</p>
-          <div id="walletOptions" style="display: grid; gap: 10px;"></div>
-        </div>
-      `;
-
-      $('retraitDetailContent').innerHTML = content;
+      $('retraitDetailContent').innerHTML = html;
       $('retraitModal').classList.remove('open');
       $('retraitDetailModal').classList.add('open');
 
-      // Setup conversion calculation avec taux live
-      const cryptoInput = $('retraitCryptoAmount');
-      const conversionZone = $('retraitConversionZone');
-      const conversionValue = $('retraitConversionValue');
-      const rateDisplayEl = $('retraitRateDisplay');
-
-      cryptoInput.addEventListener('input', () => {
-        const amount = parseFloat(cryptoInput.value) || 0;
-        const liveRate = getRetraitRate(crypto);
-        if (rateDisplayEl) rateDisplayEl.textContent = `Taux: 1 ${crypto} = ${Math.round(liveRate).toLocaleString()} MGA`;
+      var cryptoInput = $('retraitCryptoAmount');
+      var convZone    = $('retraitConversionZone');
+      var convValue   = $('retraitConversionValue');
+      var rateEl      = $('retraitRateDisplay');
+      cryptoInput.addEventListener('input', function() {
+        var amount = parseFloat(cryptoInput.value) || 0;
+        var liveRate = getRetraitRate(crypto);
+        if (rateEl) rateEl.textContent = 'Taux: 1 ' + crypto + ' = ' + Math.round(liveRate).toLocaleString() + ' MGA';
         if (amount > 0) {
-          const ariaryAmount = Math.round(amount * liveRate);
-          conversionValue.textContent = ariaryAmount.toLocaleString() + ' MGA';
-          conversionZone.style.display = 'block';
+          convValue.textContent = Math.round(amount * liveRate).toLocaleString() + ' MGA';
+          convZone.style.display = 'flex';
         } else {
-          conversionZone.style.display = 'none';
+          convZone.style.display = 'none';
         }
       });
 
-      // Setup wallet selection button
-      $('selectWalletBtn').addEventListener('click', () => {
-        const amount = parseFloat(cryptoInput.value) || 0;
-        if (amount <= 0) {
-          showCustomAlert('Veuillez entrer un montant valide');
+      var selectedWallet = null;
+      document.querySelectorAll('.retrait-wallet-select-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          if (e.target.classList.contains('retrait-copy-cred') || e.target.closest('.retrait-copy-cred')) return;
+          var wName  = card.getAttribute('data-wallet');
+          var isOpen = card.classList.contains('selected-wallet');
+
+          // Reset all cards
+          document.querySelectorAll('.retrait-wallet-select-card').forEach(function(c) {
+            c.classList.remove('selected-wallet');
+            c.style.border = '2px solid var(--border)';
+          });
+
+          var walletInfoZone = document.getElementById('retraitWalletInfoZone');
+
+          if (!isOpen) {
+            // Select this card and hide all others
+            card.classList.add('selected-wallet');
+            card.style.border = '2px solid #10b981';
+            selectedWallet = wName;
+            showToast('✅ ' + wName, '#10b981');
+
+            // Hide all other wallet cards, show only selected
+            document.querySelectorAll('.retrait-wallet-select-card').forEach(function(c) {
+              if (c !== card) {
+                c.style.display = 'none';
+              }
+            });
+
+            // Add "Changer" button above the selected card if not already present
+            var walletCards = document.getElementById('retraitWalletCards');
+            var existingChangerBtn = document.getElementById('changerWalletBtn');
+            if (!existingChangerBtn && walletCards) {
+              var changerBtn = document.createElement('button');
+              changerBtn.id = 'changerWalletBtn';
+              changerBtn.innerHTML = '🔄 Changer de portefeuille';
+              changerBtn.style.cssText = 'width:100%;padding:9px 14px;margin-bottom:10px;font-size:13px;font-weight:700;background:var(--glass-1);border:1.5px dashed var(--border);border-radius:10px;color:var(--text-muted);cursor:pointer;transition:all 0.3s;';
+              changerBtn.addEventListener('mouseenter', function() { changerBtn.style.borderColor = '#f59e0b'; changerBtn.style.color = '#f59e0b'; });
+              changerBtn.addEventListener('mouseleave', function() { changerBtn.style.borderColor = 'var(--border)'; changerBtn.style.color = 'var(--text-muted)'; });
+              changerBtn.addEventListener('click', function() {
+                // Show all cards again
+                document.querySelectorAll('.retrait-wallet-select-card').forEach(function(c) {
+                  c.style.display = '';
+                  c.classList.remove('selected-wallet');
+                  c.style.border = '2px solid var(--border)';
+                });
+                selectedWallet = null;
+                if (walletInfoZone) { walletInfoZone.innerHTML = ''; walletInfoZone.style.display = 'none'; }
+                changerBtn.remove();
+              });
+              walletCards.insertBefore(changerBtn, walletCards.firstChild);
+            }
+
+            // Build info block for the selected wallet
+            var wConfig = retraitWallets[wName] || {};
+            var isExchange = !!(wConfig.email || wConfig.id);
+            var infoHtml = '';
+
+            if (wName === 'Site Web' || wName === 'Trust Wallet') {
+              // Address-based wallet: show address for current crypto
+              var addr = wConfig.addresses && wConfig.addresses[crypto] ? wConfig.addresses[crypto] : null;
+              var logoHtml2 = wConfig.logo
+                ? '<img src="' + wConfig.logo + '" style="width:32px;height:32px;border-radius:8px;object-fit:contain;flex-shrink:0;">'
+                : '<div style="width:32px;height:32px;border-radius:8px;background:' + wConfig.color + ';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">' + (wConfig.icon || wName[0]) + '</div>';
+              infoHtml += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">'
+                + logoHtml2
+                + '<div style="font-size:15px;font-weight:800;color:var(--text-primary);">' + wName
+                + '<div style="font-size:11px;color:var(--text-muted);font-weight:500;">Transfert direct</div></div></div>';
+              if (addr) {
+                infoHtml += '<div style="margin-bottom:8px;">'
+                  + '<p style="font-size:11px;color:var(--text-muted);font-weight:700;margin-bottom:6px;">Adresse ' + crypto + ' :</p>'
+                  + '<div style="display:flex;align-items:center;gap:8px;background:var(--bg-secondary);border-radius:10px;padding:10px 12px;">'
+                  + '<code style="font-size:10px;font-weight:700;color:#10b981;font-family:JetBrains Mono,monospace;word-break:break-all;flex:1;">' + addr + '</code>'
+                  + '<button class="retrait-copy-cred" data-copy="' + addr + '" style="background:rgba(16,185,129,0.15);border:1px solid #10b981;color:#10b981;padding:5px 9px;border-radius:7px;font-size:14px;cursor:pointer;flex-shrink:0;">⧉</button>'
+                  + '</div></div>';
+              } else {
+                infoHtml += '<p style="font-size:12px;color:#f59e0b;font-weight:600;">⚠️ Adresse non disponible pour ' + crypto + ' via ' + wName + '</p>';
+              }
+            } else if (wName === 'Redotpay') {
+              // Redotpay: show email directly
+              var rpLogo = wConfig.logo
+                ? '<img src="' + wConfig.logo + '" style="width:32px;height:32px;border-radius:8px;object-fit:contain;flex-shrink:0;">'
+                : '<div style="width:32px;height:32px;border-radius:8px;background:' + wConfig.color + ';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">' + (wConfig.icon || 'R') + '</div>';
+              infoHtml += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">'
+                + rpLogo
+                + '<div style="font-size:15px;font-weight:800;color:var(--text-primary);">Redotpay'
+                + '<div style="font-size:11px;color:var(--text-muted);font-weight:500;">Transfert via email</div></div></div>';
+              if (wConfig.email) {
+                infoHtml += '<div style="display:flex;align-items:center;gap:8px;background:var(--bg-secondary);border-radius:10px;padding:10px 12px;">'
+                  + '<code style="font-size:13px;font-weight:700;color:#f59e0b;font-family:JetBrains Mono,monospace;flex:1;">' + wConfig.email + '</code>'
+                  + '<button class="retrait-copy-cred" data-copy="' + wConfig.email + '" style="background:rgba(245,158,11,0.15);border:1px solid #f59e0b;color:#f59e0b;padding:5px 9px;border-radius:7px;font-size:14px;cursor:pointer;flex-shrink:0;">⧉</button>'
+                  + '</div>';
+              }
+            } else {
+              // Exchange (Binance, OKX, MEXC, BYBIT): show ID + email
+              var exLogo = wConfig.logo
+                ? '<img src="' + wConfig.logo + '" style="width:32px;height:32px;border-radius:8px;object-fit:contain;flex-shrink:0;">'
+                : '<div style="width:32px;height:32px;border-radius:8px;background:' + wConfig.color + ';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;">' + (wConfig.icon || wName[0]) + '</div>';
+              infoHtml += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">'
+                + exLogo
+                + '<div style="font-size:15px;font-weight:800;color:var(--text-primary);">' + wName
+                + '<div style="font-size:11px;color:var(--text-muted);font-weight:500;">Transfert via exchange</div></div></div>';
+              if (wConfig.id) {
+                infoHtml += '<div style="margin-bottom:8px;">'
+                  + '<p style="font-size:11px;color:var(--text-muted);font-weight:700;margin-bottom:5px;">ID ' + wName + ' :</p>'
+                  + '<div style="display:flex;align-items:center;gap:8px;background:var(--bg-secondary);border-radius:10px;padding:10px 12px;">'
+                  + '<code style="font-size:14px;font-weight:700;color:#f59e0b;font-family:JetBrains Mono,monospace;flex:1;">' + wConfig.id + '</code>'
+                  + '<button class="retrait-copy-cred" data-copy="' + wConfig.id + '" style="background:rgba(245,158,11,0.15);border:1px solid #f59e0b;color:#f59e0b;padding:5px 9px;border-radius:7px;font-size:14px;cursor:pointer;flex-shrink:0;">⧉</button>'
+                  + '</div></div>';
+              }
+              if (wConfig.email) {
+                infoHtml += '<div style="margin-bottom:4px;">'
+                  + '<p style="font-size:11px;color:var(--text-muted);font-weight:700;margin-bottom:5px;">Email :</p>'
+                  + '<div style="display:flex;align-items:center;gap:8px;background:var(--bg-secondary);border-radius:10px;padding:10px 12px;">'
+                  + '<code style="font-size:12px;font-weight:700;color:#f59e0b;font-family:JetBrains Mono,monospace;flex:1;word-break:break-all;">' + wConfig.email + '</code>'
+                  + '<button class="retrait-copy-cred" data-copy="' + wConfig.email + '" style="background:rgba(245,158,11,0.15);border:1px solid #f59e0b;color:#f59e0b;padding:5px 9px;border-radius:7px;font-size:14px;cursor:pointer;flex-shrink:0;">⧉</button>'
+                  + '</div></div>';
+              }
+            }
+
+            if (walletInfoZone) {
+              walletInfoZone.innerHTML = infoHtml;
+              walletInfoZone.style.display = 'block';
+            }
+          } else {
+            selectedWallet = null;
+            if (walletInfoZone) { walletInfoZone.innerHTML = ''; walletInfoZone.style.display = 'none'; }
+            // Show all cards again
+            document.querySelectorAll('.retrait-wallet-select-card').forEach(function(c) {
+              c.style.display = '';
+            });
+            var existingChangerBtn2 = document.getElementById('changerWalletBtn');
+            if (existingChangerBtn2) existingChangerBtn2.remove();
+          }
+        });
+      });
+
+      document.getElementById('retraitDetailContent').addEventListener('click', function(e) {
+        var btn = e.target.closest('.retrait-copy-cred');
+        if (!btn) return;
+        var txt = btn.getAttribute('data-copy');
+        copyToClipboard(txt, function() {
+          btn.textContent = '✅';
+          setTimeout(function() { btn.textContent = '⧉'; }, 1500);
+          showToast('📋 Copié !', '#10b981');
+        });
+      });
+
+      document.getElementById('confirmRetraitBtn').addEventListener('click', function() {
+        var amount = parseFloat($('retraitCryptoAmount').value) || 0;
+        var network = $('retraitNetworkValue') ? $('retraitNetworkValue').value.trim() : '';
+        var phone   = $('retraitPhoneNumber') ? $('retraitPhoneNumber').value.trim() : '';
+        var simName = $('retraitSimName') ? $('retraitSimName').value.trim() : '';
+        if (amount <= 0) { showCustomAlert('Veuillez entrer un montant valide.'); return; }
+        if (!selectedWallet) { showCustomAlert('Veuillez selectionner un portefeuille.'); return; }
+        if (!network) { showCustomAlert('Veuillez choisir un reseau.'); return; }
+        var validNets = cryptoNetworkMap[crypto] || [];
+        if (validNets.length > 0 && validNets.indexOf(network) === -1) {
+          showCustomAlert('Reseau incompatible avec ' + crypto + '. Valides: ' + validNets.join(', '));
           return;
         }
-        showWalletOptions();
+        var wConf = retraitWallets[selectedWallet] || {};
+        var isExchange = !!(wConf.email || wConf.id);
+        if (!isExchange && !phone) { showCustomAlert('Veuillez entrer votre numero de telephone.'); return; }
+        if (!isExchange && !simName) { showCustomAlert('Veuillez entrer le nom sur la puce.'); return; }
+        var liveRate = getRetraitRate(crypto);
+        showRetraitConfirmation(crypto, amount, selectedWallet, Math.round(amount * liveRate), phone, simName);
       });
     }
+
 
     // ── Retrait Network Selector ─────────────────────────────────────────────
     function toggleRetraitNetworkPanel() {
@@ -7999,7 +8353,7 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       $('retraitConfirmModal').classList.add('open');
 
       // Setup copy button
-      $('copyRetraitInfoBtn').addEventListener('click', () => {
+      on('copyRetraitInfoBtn', 'click', () => {
         let simCardInfo = '';
         if (phoneNumber) simCardInfo += `\n📱 Téléphone: ${phoneNumber}`;
         if (simName) simCardInfo += `\n👤 Nom sur puce: ${simName}`;
@@ -8077,11 +8431,205 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       const retraitCryptoItem = e.target.closest('.retrait-crypto-item');
       if (retraitCryptoItem) {
         const crypto = retraitCryptoItem.getAttribute('data-crypto');
+        const wallet = retraitCryptoItem.getAttribute('data-wallet');
         if (crypto) {
-          showRetraitForm(crypto);
+          // Close retrait modal, open detail
+          $('retraitModal').classList.remove('open');
+          showRetraitForm(crypto, wallet);
         }
       }
     });
+
+    // ── Depot state ────────────────────────────────────────────────────────────
+    var currentDepotCrypto   = null;
+    var currentDepotPlatform = null;
+
+    // ── showDepotPlatformDetail ──────────────────────────────────────────────
+    function showDepotPlatformDetail(platform) {
+      var config = depotPlatformCryptos[platform];
+      if (!config) return;
+      currentDepotPlatform = platform;
+
+      var cryptos = config.cryptos || [];
+      var style   = cryptoStyles || {};
+
+      // Build crypto list HTML
+      var rows = cryptos.map(function(c) {
+        var cs = style[c] || { color: '#888', icon: c[0] };
+        return '<div class="depot-crypto-item" data-crypto="' + c + '" data-platform="' + platform + '" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:all 0.2s;">'
+          + '<div style="width:38px;height:38px;border-radius:50%;background:' + cs.color + '22;border:2px solid ' + cs.color + ';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:' + cs.color + ';">' + cs.icon + '</div>'
+          + '<div style="flex:1;">'
+          +   '<div style="font-size:15px;font-weight:700;color:var(--text-primary);">' + c + '</div>'
+          +   '<div style="font-size:12px;color:var(--text-muted);">Déposer en ' + c + '</div>'
+          + '</div>'
+          + '<span style="color:var(--text-muted);font-size:18px;">›</span>'
+          + '</div>';
+      }).join('');
+
+      var platformLogo = config.logo
+        ? '<img src="' + config.logo + '" style="width:40px;height:40px;border-radius:10px;object-fit:contain;">'
+        : '<div style="width:40px;height:40px;border-radius:10px;background:' + config.color + ';display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;">' + config.name[0] + '</div>';
+
+      var html = '<div style="padding-bottom:12px;">'
+        + '<div style="display:flex;align-items:center;gap:12px;padding:16px 0 12px;border-bottom:1px solid var(--border);margin-bottom:4px;">'
+        + platformLogo
+        + '<div><div style="font-size:18px;font-weight:800;color:var(--text-primary);">' + config.name + '</div>'
+        + '<div style="font-size:12px;color:var(--text-muted);">Choisir la crypto à déposer</div></div>'
+        + '</div>'
+        + rows
+        + '</div>';
+
+      $('depotDetailContent').innerHTML = html;
+      $('depotModal').classList.remove('open');
+      $('depotDetailModal').classList.add('open');
+      _depotInputListenerAttached = false;
+    }
+
+    // ── Click on a crypto in the depot detail list ───────────────────────────
+    document.addEventListener('click', function(e) {
+      var item = e.target.closest('.depot-crypto-item');
+      if (item) {
+        var crypto   = item.getAttribute('data-crypto');
+        var platform = item.getAttribute('data-platform') || currentDepotPlatform;
+        if (!crypto || !platform) return;
+        currentDepotCrypto = crypto;
+        currentDepotPlatform = platform;
+        showDepotCryptoForm(crypto, platform);
+      }
+    });
+
+    // ── showDepotCryptoForm ───────────────────────────────────────────────────
+    function showDepotCryptoForm(crypto, platform) {
+      var config  = depotPlatformCryptos[platform] || {};
+      var cs      = cryptoStyles[crypto] || { color: '#888', icon: crypto[0] };
+      var isExchange = (config.email || config.id);
+
+      var html = '<div style="padding:4px 0;">'
+        + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">'
+        + '<div style="width:44px;height:44px;border-radius:50%;background:' + cs.color + '22;border:2px solid ' + cs.color + ';display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:' + cs.color + ';">' + cs.icon + '</div>'
+        + '<div><div style="font-size:17px;font-weight:800;color:var(--text-primary);">Déposer en ' + crypto + '</div>'
+        + '<div style="font-size:12px;color:var(--text-muted);">via ' + config.name + '</div></div>'
+        + '</div>';
+
+      // Badge taux live
+      html += '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;">'
+            + '<span class="rates-live-badge" style="font-size:11px;font-weight:600;color:#10b981;">🟢 Chargement des taux...</span></div>';
+
+      // Network selector (for Trust Wallet / Direct Site)
+      if (!isExchange) {
+        html += '<div style="margin-bottom:14px;">'
+              + '<label style="font-size:13px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:6px;">🌐 Réseau :</label>'
+              + '<select id="depotNetwork" style="width:100%;padding:12px;border-radius:10px;border:2px solid var(--border);background:var(--glass-1);color:var(--text-primary);font-size:14px;">'
+              + '<option value="">-- Choisir le réseau --</option>'
+              + ['TRC20','BSC (BNB Smart Chain BEP20)','LTC-(Litecoin)','POL-(POLYGON)','SOL-(SOLANA)','DOGECOIN','XRB','TONCoin','XRP','BCH-(Bitcoin Cash)','SUI-(SUIcoin)','ARB-(ARBITRUM)'].map(function(n){ return '<option value="' + n + '">' + n + '</option>'; }).join('')
+              + '</select></div>';
+      } else {
+        html += '<input type="hidden" id="depotNetwork" value="">';
+      }
+
+      // Address field — ID/Email for exchanges (BINANCE, OKX, MEXC, BYBIT, Redotpay), crypto address for others
+      var exchangePlatformsWithId = ['binance','okx','mexc','bybit-depot','redotpay'];
+      var isExchangePlatform = exchangePlatformsWithId.indexOf(platform) !== -1;
+      if (isExchange && isExchangePlatform) {
+        var platformDisplayName = config.name || platform.toUpperCase();
+        html += '<div style="margin-bottom:14px;">'
+              + '<label style="font-size:13px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:6px;">🪪 ID ou adresse Email du portefeuille ' + platformDisplayName + ' :</label>'
+              + '<input type="text" id="depotCryptoAddress" placeholder="Ex: 123456789 ou email@exemple.com" style="width:100%;padding:14px;font-size:13px;font-family:JetBrains Mono,monospace;border:2px solid var(--border);border-radius:12px;background:var(--glass-1);color:var(--text-primary);outline:none;box-sizing:border-box;">'
+              + '<div style="margin-top:6px;padding:8px 12px;background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.25);border-radius:8px;font-size:11px;color:var(--text-muted);">💡 Entrez votre ID ' + platformDisplayName + ' <strong>OU</strong> votre adresse email associée au compte</div>'
+              + '<div id="addressLiveIndicator" style="margin-top:6px;font-size:12px;display:none;padding:6px 10px;border-radius:8px;"></div>'
+              + '</div>';
+      } else {
+        html += '<div style="margin-bottom:14px;">'
+              + '<label style="font-size:13px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:6px;">🔗 Adresse ' + crypto + ' :</label>'
+              + '<input type="text" id="depotCryptoAddress" placeholder="Collez votre adresse ' + crypto + ' ici" oninput="checkAddressLive(this.value)" style="width:100%;padding:14px;font-size:13px;font-family:JetBrains Mono,monospace;border:2px solid var(--border);border-radius:12px;background:var(--glass-1);color:var(--text-primary);outline:none;box-sizing:border-box;">'
+              + '<div id="addressLiveIndicator" style="margin-top:6px;font-size:12px;display:none;padding:6px 10px;border-radius:8px;"></div>'
+              + '</div>';
+      }
+
+      // Conversion display
+      html += '<div style="margin-bottom:14px;">'
+            + '<label style="font-size:13px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:6px;">💰 Montant en Ariary (MGA) :</label>'
+            + '<input type="number" id="depotAmountAriary" placeholder="Ex: 10000" min="4000" style="width:100%;padding:14px;font-size:16px;border:2px solid var(--border);border-radius:12px;background:var(--glass-1);color:var(--text-primary);outline:none;box-sizing:border-box;">'
+            + '<p style="font-size:12px;color:#f59e0b;margin-top:6px;">⚠️ Minimum: <strong>4 000 MGA</strong></p>'
+            + '</div>';
+
+      // Conversion result
+      html += '<div id="conversionDisplay" style="display:none;margin-bottom:14px;padding:14px;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(6,182,212,0.1));border:2px solid #10b981;border-radius:12px;text-align:center;">'
+            + '<p style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">💱 Conversion en temps réel</p>'
+            + '<p id="convertedAmount" style="font-size:20px;font-weight:800;color:#10b981;font-family:JetBrains Mono,monospace;">0 ' + crypto + '</p>'
+            + '<p id="depotRateDisplay" style="font-size:11px;color:var(--text-muted);margin-top:6px;">Taux: 1 ' + crypto + ' ≈ ' + Math.round(getDepotRate(crypto)).toLocaleString() + ' MGA</p>'
+            + '</div>';
+
+      // Payment method selector
+      html += '<div style="margin-bottom:14px;">'
+            + '<label style="font-size:13px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:8px;">💳 Mode de paiement :</label>'
+            + '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">'
+            + ['orange','mvola','airtel'].map(function(p) {
+                var labels = { orange:'Orange Money', mvola:'MVola', airtel:'Airtel Money' };
+                var colors = { orange:'#ff6600', mvola:'#e4002b', airtel:'#c00' };
+                return '<button class="depot-payment-btn" data-payment="' + p + '" style="padding:10px 6px;border:2px solid var(--border);border-radius:10px;background:var(--glass-1);cursor:pointer;font-size:11px;font-weight:700;color:var(--text-muted);transition:all 0.2s;">' + labels[p] + '</button>';
+              }).join('')
+            + '</div></div>';
+
+      // Confirm button
+      html += '<button id="depotConfirmBtn" style="width:100%;padding:16px;background:linear-gradient(135deg,#10b981,#059669);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;">✅ Confirmer le dépôt</button>';
+      html += '</div>';
+
+      $('depotDetailContent').innerHTML = html;
+      _depotInputListenerAttached = false;
+
+      // Payment button selection
+      var selectedPayment = null;
+      document.querySelectorAll('.depot-payment-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.depot-payment-btn').forEach(function(b) {
+            b.style.border = '2px solid var(--border)'; b.style.color = 'var(--text-muted)';
+          });
+          btn.style.border = '2px solid #10b981'; btn.style.color = '#10b981';
+          selectedPayment = btn.getAttribute('data-payment');
+        });
+      });
+
+      // Confirm button
+      document.getElementById('depotConfirmBtn').addEventListener('click', function() {
+        var address = ($('depotCryptoAddress') ? $('depotCryptoAddress').value.trim() : '');
+        var amount  = parseFloat($('depotAmountAriary') ? $('depotAmountAriary').value : 0) || 0;
+        var network = $('depotNetwork') ? $('depotNetwork').value.trim() : '';
+
+        var exchangePlatformsIdCheck = ['binance','okx','mexc','bybit-depot','redotpay'];
+        var isIdEmailPlatform = isExchange && exchangePlatformsIdCheck.indexOf(platform) !== -1;
+
+        if (!isExchange && !address) { showCustomAlert('Veuillez saisir votre adresse ' + crypto + '.'); return; }
+        if (isIdEmailPlatform && !address) { showCustomAlert('Veuillez saisir votre ID ou email ' + (config.name || platform) + '.'); return; }
+        if (!isExchange && !network) { showCustomAlert('Veuillez selectionner un reseau.'); return; }
+        if (amount < 4000) { showCustomAlert('Le montant minimum est de 4 000 MGA.'); return; }
+        if (!isExchange && !selectedPayment) { showCustomAlert('Veuillez choisir un mode de paiement.'); return; }
+
+        if (!isExchange) {
+          var addrVal = validateAddressForNetwork(address, network);
+          if (!addrVal.valid) { showAddressNetworkError(address, network); return; }
+        }
+
+        var liveRate = getDepotRate(crypto);
+        var convertedCrypto = (amount / liveRate).toFixed(6);
+        var paymentName = '', paymentNumber = '', accountName = '', ussdCode = '';
+
+        if (selectedPayment === 'orange') {
+          paymentName = 'Orange Money'; paymentNumber = '032 46 510 97'; accountName = 'Kevin Ameros';
+          ussdCode = '144*11*0324651097*0324651097*' + amount + '*2#';
+        } else if (selectedPayment === 'mvola') {
+          paymentName = 'MVola'; paymentNumber = '034 85 036 47'; accountName = 'Kevin Ameros';
+          ussdCode = '111*1*2*0348503647*' + amount + '*2*55#';
+        } else if (selectedPayment === 'airtel') {
+          paymentName = 'Airtel Money'; paymentNumber = '033 70 518 26'; accountName = 'Kevin Ameros';
+          ussdCode = '*436*2*1*1*0337051826*' + amount + '*2#';
+        }
+
+        // For ID/email platforms: pass the user's ID/email as address
+        var exchangeAddr = isIdEmailPlatform ? address : (isExchange ? '' : address);
+        showDepotConfirmation(crypto, amount, exchangeAddr, paymentName, paymentNumber, accountName, network, convertedCrypto, ussdCode);
+      });
+    }
 
     // Event delegation for depot platform buttons
     document.addEventListener('click', function(e) {
@@ -8095,119 +8643,119 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     });
 
     // Orange Money Modal
-    $('orangeMoneyBtn').addEventListener('click', () => {
+    on('orangeMoneyBtn', 'click', () => {
       $('orangeMoneyModal').classList.add('open');
     });
-    $('closeOrangeMoneyModal').addEventListener('click', () => {
+    on('closeOrangeMoneyModal', 'click', () => {
       $('orangeMoneyModal').classList.remove('open');
     });
-    $('orangeMoneyModal').addEventListener('click', (e) => {
+    on('orangeMoneyModal', 'click', (e) => {
       if (e.target === $('orangeMoneyModal')) {
         $('orangeMoneyModal').classList.remove('open');
       }
     });
 
     // MVola Modal
-    $('mvolaBtn').addEventListener('click', () => {
+    on('mvolaBtn', 'click', () => {
       $('mvolaModal').classList.add('open');
     });
-    $('closeMvolaModal').addEventListener('click', () => {
+    on('closeMvolaModal', 'click', () => {
       $('mvolaModal').classList.remove('open');
     });
-    $('mvolaModal').addEventListener('click', (e) => {
+    on('mvolaModal', 'click', (e) => {
       if (e.target === $('mvolaModal')) {
         $('mvolaModal').classList.remove('open');
       }
     });
 
     // Airtel Money Modal
-    $('airtelMoneyBtn').addEventListener('click', () => {
+    on('airtelMoneyBtn', 'click', () => {
       $('airtelMoneyModal').classList.add('open');
     });
-    $('closeAirtelMoneyModal').addEventListener('click', () => {
+    on('closeAirtelMoneyModal', 'click', () => {
       $('airtelMoneyModal').classList.remove('open');
     });
-    $('airtelMoneyModal').addEventListener('click', (e) => {
+    on('airtelMoneyModal', 'click', (e) => {
       if (e.target === $('airtelMoneyModal')) {
         $('airtelMoneyModal').classList.remove('open');
       }
     });
 
-    $('cryptoRouletteProBtn').addEventListener('click', () => showPage('crypto-roulette-pro'));
-    $('guide01Btn').addEventListener('click', () => showPage('guide-01'));
+    on('cryptoRouletteProBtn', 'click', () => showPage('crypto-roulette-pro'));
+    on('guide01Btn', 'click', () => showPage('guide-01'));
 
     // Guide fampiasana Apk sub-buttons
-    $('guideFaucetpayBtn').addEventListener('click', () => showPage('guide-faucetpay'));
-    $('guideMkCryptAppBtn').addEventListener('click', () => showPage('guide-mk-crypt-app'));
-    $('guideMkCryptApkV2Btn').addEventListener('click', () => showPage('guide-mk-crypt-apk-v2'));
+    on('guideFaucetpayBtn', 'click', () => showPage('guide-faucetpay'));
+    on('guideMkCryptAppBtn', 'click', () => showPage('guide-mk-crypt-app'));
+    on('guideMkCryptApkV2Btn', 'click', () => showPage('guide-mk-crypt-apk-v2'));
 
     // Faucetpay tutorials sub-buttons
-    $('faucetpayCreationBtn').addEventListener('click', () => showPage('faucetpay-creation'));
-    $('faucetpayDepotBtn').addEventListener('click', () => showPage('faucetpay-depot'));
-    $('faucetpayRetraitBtn').addEventListener('click', () => showPage('faucetpay-retrait'));
+    on('faucetpayCreationBtn', 'click', () => showPage('faucetpay-creation'));
+    on('faucetpayDepotBtn', 'click', () => showPage('faucetpay-depot'));
+    on('faucetpayRetraitBtn', 'click', () => showPage('faucetpay-retrait'));
 
     // Histoire MK Crypt sub-buttons
-    $('origineBtn').addEventListener('click', () => showPage('origine'));
-    $('decouverteGamblingBtn').addEventListener('click', () => showPage('decouverte-gambling'));
-    $('sacrificeBtn').addEventListener('click', () => showPage('sacrifice'));
-    $('succesBtn').addEventListener('click', () => showPage('succes'));
+    on('origineBtn', 'click', () => showPage('origine'));
+    on('decouverteGamblingBtn', 'click', () => showPage('decouverte-gambling'));
+    on('sacrificeBtn', 'click', () => showPage('sacrifice'));
+    on('succesBtn', 'click', () => showPage('succes'));
 
     // Système + Stratégie buttons (from systeme-apk page)
-    $('systemeKenoBtn').addEventListener('click', () => showPage('ss-keno'));
-    $('systemeRouletteBtn').addEventListener('click', () => showPage('ss-roulette'));
-    $('systemeDiceBtn').addEventListener('click', () => showPage('ss-dice'));
+    on('systemeKenoBtn', 'click', () => showPage('ss-keno'));
+    on('systemeRouletteBtn', 'click', () => showPage('ss-roulette'));
+    on('systemeDiceBtn', 'click', () => showPage('ss-dice'));
 
     // Stratégie buttons
-    $('stratKenoBtn').addEventListener('click', () => showPage('strat-keno'));
-    $('stratRouletteBtn').addEventListener('click', () => showPage('strat-roulette'));
-    $('stratDiceBtn').addEventListener('click', () => showPage('strat-dice'));
-    $('stratLimboBtn').addEventListener('click', () => showPage('strat-limbo'));
+    on('stratKenoBtn', 'click', () => showPage('strat-keno'));
+    on('stratRouletteBtn', 'click', () => showPage('strat-roulette'));
+    on('stratDiceBtn', 'click', () => showPage('strat-dice'));
+    on('stratLimboBtn', 'click', () => showPage('strat-limbo'));
 
     // Keno sub-strategy buttons
-    $('kenoClassicBtn').addEventListener('click', () => showPage('keno-classic'));
-    $('kenoMoyenBtn').addEventListener('click', () => showPage('keno-moyen'));
-    $('kenoRisqueBtn').addEventListener('click', () => showPage('keno-risque'));
-    $('kenoTresRisqueBtn').addEventListener('click', () => showPage('keno-tres-risque'));
+    on('kenoClassicBtn', 'click', () => showPage('keno-classic'));
+    on('kenoMoyenBtn', 'click', () => showPage('keno-moyen'));
+    on('kenoRisqueBtn', 'click', () => showPage('keno-risque'));
+    on('kenoTresRisqueBtn', 'click', () => showPage('keno-tres-risque'));
 
     // Roulette sub-strategy buttons
-    $('rouletteClassicBtn').addEventListener('click', () => showPage('roulette-classic'));
-    $('rouletteMoyenBtn').addEventListener('click', () => showPage('roulette-moyen'));
-    $('rouletteRisqueBtn').addEventListener('click', () => showPage('roulette-risque'));
-    $('rouletteTresRisqueBtn').addEventListener('click', () => showPage('roulette-tres-risque'));
+    on('rouletteClassicBtn', 'click', () => showPage('roulette-classic'));
+    on('rouletteMoyenBtn', 'click', () => showPage('roulette-moyen'));
+    on('rouletteRisqueBtn', 'click', () => showPage('roulette-risque'));
+    on('rouletteTresRisqueBtn', 'click', () => showPage('roulette-tres-risque'));
 
     // Dice sub-strategy buttons
-    $('diceClassicBtn').addEventListener('click', () => showPage('dice-classic'));
-    $('diceMoyenBtn').addEventListener('click', () => showPage('dice-moyen'));
-    $('diceRisqueBtn').addEventListener('click', () => showPage('dice-risque'));
-    $('diceTresRisqueBtn').addEventListener('click', () => showPage('dice-tres-risque'));
+    on('diceClassicBtn', 'click', () => showPage('dice-classic'));
+    on('diceMoyenBtn', 'click', () => showPage('dice-moyen'));
+    on('diceRisqueBtn', 'click', () => showPage('dice-risque'));
+    on('diceTresRisqueBtn', 'click', () => showPage('dice-tres-risque'));
 
     // Limbo sub-strategy buttons
-    $('limboClassicBtn').addEventListener('click', () => showPage('limbo-classic'));
-    $('limboMoyenBtn').addEventListener('click', () => showPage('limbo-moyen'));
-    $('limboRisqueBtn').addEventListener('click', () => showPage('limbo-risque'));
-    $('limboTresRisqueBtn').addEventListener('click', () => showPage('limbo-tres-risque'));
+    on('limboClassicBtn', 'click', () => showPage('limbo-classic'));
+    on('limboMoyenBtn', 'click', () => showPage('limbo-moyen'));
+    on('limboRisqueBtn', 'click', () => showPage('limbo-risque'));
+    on('limboTresRisqueBtn', 'click', () => showPage('limbo-tres-risque'));
 
     // Formation buttons
-    $('formationGratuitBtn').addEventListener('click', () => showPage('formation-gratuit'));
-    $('formationAvanceeBtn').addEventListener('click', () => showPage('formation-avancee'));
+    on('formationGratuitBtn', 'click', () => showPage('formation-gratuit'));
+    on('formationAvanceeBtn', 'click', () => showPage('formation-avancee'));
 
     // Guide buttons (Formation Gratuit sub-pages)
-    $('guideCalculRollBtn').addEventListener('click', () => showPage('guide-calcul-roll'));
-    $('guideInscriptionBtn').addEventListener('click', () => showPage('guide-inscription'));
+    on('guideCalculRollBtn', 'click', () => showPage('guide-calcul-roll'));
+    on('guideInscriptionBtn', 'click', () => showPage('guide-inscription'));
 
     // Close buttons
-    $('closeCmdPage').addEventListener('click', () => goBack());
-    $('closeVerifyPage').addEventListener('click', () => goBack());
+    on('closeCmdPage', 'click', () => goBack());
+    on('closeVerifyPage', 'click', () => goBack());
 
     // Home button on timer page
-    $('homeBtn').addEventListener('click', () => {
+    on('homeBtn', 'click', () => {
       showPage('home');
     });
 
     // Side menu
     const sideMenu = $('sideMenu');
-    $('hamburger').addEventListener('click', () => sideMenu.classList.toggle('open'));
-    $('closeMenu').addEventListener('click', () => sideMenu.classList.remove('open'));
+    on('hamburger', 'click', () => sideMenu.classList.toggle('open'));
+    on('closeMenu', 'click', () => sideMenu.classList.remove('open'));
 
     document.querySelectorAll('.side-menu button[data-target]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -8360,7 +8908,7 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
     }
 
     // ========== CONFIRM BUTTON: MODAL + REDIRECT ==========
-    confirmBtn.addEventListener('click', () => {
+    if (confirmBtn) confirmBtn.addEventListener('click', () => {
       // Validate Facebook username
       const fbUsername = facebookUsername.value.trim();
       const emailInput = document.getElementById('emailAddress');
@@ -8473,7 +9021,7 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       isLightTheme = true;
     }
 
-    themeBtn.addEventListener('click', () => {
+    if (themeBtn) themeBtn.addEventListener('click', () => {
       isLightTheme = document.documentElement.classList.toggle('light');
     });
 
@@ -8515,14 +9063,14 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       }
     }
 
-    zoomInBtn.addEventListener('click', () => {
+    if (zoomInBtn) zoomInBtn.addEventListener('click', () => {
       if (zoomLevel < maxZoom) {
         zoomLevel = Math.min(maxZoom, zoomLevel + zoomStep);
         updateZoom();
       }
     });
 
-    zoomOutBtn.addEventListener('click', () => {
+    if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => {
       if (zoomLevel > minZoom) {
         zoomLevel = Math.max(minZoom, zoomLevel - zoomStep);
         updateZoom();
@@ -8715,14 +9263,14 @@ Fill in the current market prices in USD for each. Return ONLY the JSON object.`
       continueTimer(totalSeconds);
     }
 
-    // Login button - just navigate without starting timer
-    $('loginBtn').addEventListener('click', () => {
-      showPage('home');
-    });
-
     // ========== RESTORE TIMER ON PAGE LOAD ==========
     // Check if there's an active timer when the page loads
     window.addEventListener('DOMContentLoaded', () => {
+      // Login button - navigate to home
+      on('loginBtn', 'click', () => {
+        showPage('home');
+      });
+
       const restored = restoreTimer();
       if (restored) {
         console.log('✅ Chronomètre restauré avec succès');
