@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -6206,11 +6207,11 @@
           <div style="background: var(--glass-1); border: 2px solid var(--border); border-radius: 16px; padding: 20px; text-align: left;">
             <div style="margin-bottom: 16px;">
               <span style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 4px;">ID BINANCE:</span>
-              <span style="font-size: 18px; font-weight: 700; color: var(--text-primary); font-family: 'JetBrains Mono', monospace;">1251279130</span>
+              <span style="font-size: 18px; font-weight: 700; color: var(--text-primary); font-family: 'JetBrains Mono', monospace;">772979988</span>
             </div>
             <div>
               <span style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 4px;">Email Binance:</span>
-              <span style="font-size: 15px; font-weight: 600; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; word-break: break-all;">mkcryptindustrie@gmail.com</span>
+              <span style="font-size: 15px; font-weight: 600; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; word-break: break-all;">michaelmclemore000@gmail.com</span>
             </div>
           </div>
         `
@@ -6232,7 +6233,7 @@
             </div>
             <div>
               <span style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 4px;">Email MEXC:</span>
-              <span style="font-size: 15px; font-weight: 600; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; word-break: break-all;">mkcryptindustrie@gmail.com</span>
+              <span style="font-size: 15px; font-weight: 600; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; word-break: break-all;">michaelmclemore001@gmail.com</span>
             </div>
           </div>
         `
@@ -6396,16 +6397,16 @@
         name: 'BINANCE',
         color: '#f0b90b',
         logo: 'https://pfst.cf2.poecdn.net/base/image/92033d9683f1d726c267b19d54c0b37c1d82ff332ce06e3085a8262acba8abad?w=143&h=144',
-        id: '1251279130',
-        email: 'mkcryptindustrie@gmail.com',
+        id: '772979988',
+        email: 'michaelmclemore000@gmail.com',
         cryptos: ['USDT', 'BNB', 'TRX', 'LTC', 'POLYGON', 'BCH', 'SOL', 'SUI', 'ARB', 'XRP', 'TON', 'DOGECOIN']
       },
       'mexc': {
         name: 'MEXC',
         color: '#2354e6',
         logo: null,
-        email: 'mkcryptindustrie@gmail.com',
-        email: 'mkcryptindustrie@gmail.com',
+        id: '10341623',
+        email: 'michaelmclemore001@gmail.com',
         cryptos: ['USDT', 'BNB', 'TRX', 'LTC', 'POLYGON', 'BCH', 'SOL', 'SUI', 'ARB', 'DOGECOIN']
       },
       'okx': {
@@ -7038,8 +7039,8 @@ Return ONLY the JSON object with real current prices.`;
     setInterval(refreshOpenConversions, 60 * 1000);
 
     // ── Marge commerciale : +5% sur dépôt, -8% sur retrait ──────────────────────
-    const DEPOT_MARGIN = 1.02;   // taux dépôt majoré +2%
-    const RETRAIT_MARGIN = 0.88; // taux retrait minoré -12% → prix plus bas pour l'utilisateur
+    const DEPOT_MARGIN = 1.08;   // taux dépôt majoré +8%
+    const RETRAIT_MARGIN = 0.89; // taux retrait minoré -11% → prix plus bas pour l'utilisateur
 
     function getDepotRate(crypto) {
       var base = cryptoRates[crypto] || cryptoRatesFallback[crypto] || 4620;
@@ -7530,7 +7531,7 @@ Return ONLY the JSON object with real current prices.`;
     };
 
     const retraitWallets = {
-      'BINANCE': { color: '#f3ba2f', icon: 'B', logo: 'https://pfst.cf2.poecdn.net/base/image/b0680c4cc24fb5e8a959f250ef10556ebb290e7c8f40bb026eeaef4f60ddfcf3?w=384&h=408', id: '1251279130', email: 'mkcryptindustrie@gmail.com' },
+      'BINANCE': { color: '#f3ba2f', icon: 'B', logo: 'https://pfst.cf2.poecdn.net/base/image/b0680c4cc24fb5e8a959f250ef10556ebb290e7c8f40bb026eeaef4f60ddfcf3?w=384&h=408', id: '772979988', email: 'michaelmclemore000@gmail.com' },
       'OKX': { color: '#000000', icon: 'O', logo: 'https://pfst.cf2.poecdn.net/base/image/1b7d52db99a5b355f0462be0de1975b6ff6ab9a3a73befd2017142a9e22ae6df?w=418&h=429', email: 'mkcryptindustrie@gmail.com' },
       'Site Web': { color: '#6366f1', icon: '🌐', logo: null, addresses: {
         'BNB': '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18',
@@ -7560,7 +7561,7 @@ Return ONLY the JSON object with real current prices.`;
         'ARB': '0xF4c49254a2707253e574bEa97953C9c5c0D2aE18',
         'XRP': 'r3Ga983rZYQb58CEhsmpx4FnzbcERpMkQk'
       }, xrpMemo: '' },
-      'MEXC': { color: '#00b897', icon: 'M', logo: 'https://pfst.cf2.poecdn.net/base/image/e764c0db9b2610d20231ef0119f9e598a7eb7cd8d4e16947fbd4bd3eaa622831?w=764&h=561', email: 'mkcryptindustrie@gmail.com' },
+      'MEXC': { color: '#00b897', icon: 'M', logo: 'https://pfst.cf2.poecdn.net/base/image/e764c0db9b2610d20231ef0119f9e598a7eb7cd8d4e16947fbd4bd3eaa622831?w=764&h=561', id: '10341623', email: 'michaelmclemore001@gmail.com' },
       'BYBIT': { color: '#f7a600', icon: 'BY', logo: null, email: 'mkcryptindustrie@gmail.com' },
       'Redotpay': { color: '#e4002b', icon: 'R', logo: null, email: 'michaelmclemore001@gmail.com' }
     };
@@ -7812,6 +7813,9 @@ Return ONLY the JSON object with real current prices.`;
                 });
                 selectedWallet = null;
                 if (walletInfoZone) { walletInfoZone.innerHTML = ''; walletInfoZone.style.display = 'none'; }
+                // Réafficher le bouton réseau quand on rechange de portefeuille
+                var netWrap = document.querySelector('#selectRetraitNetworkBtn') ? document.querySelector('#selectRetraitNetworkBtn').parentElement : null;
+                if (netWrap) netWrap.style.display = '';
                 changerBtn.remove();
               });
               walletCards.insertBefore(changerBtn, walletCards.firstChild);
@@ -7821,6 +7825,15 @@ Return ONLY the JSON object with real current prices.`;
             var wConfig = retraitWallets[wName] || {};
             var isExchange = !!(wConfig.email || wConfig.id);
             var infoHtml = '';
+
+            // Masquer le bouton réseau pour les exchanges (BINANCE, OKX, BYBIT, MEXC, Redotpay)
+            var networkBtnWrap = document.querySelector('#selectRetraitNetworkBtn') ? document.querySelector('#selectRetraitNetworkBtn').parentElement : null;
+            if (networkBtnWrap) {
+              networkBtnWrap.style.display = isExchange ? 'none' : '';
+            }
+            // Vider la valeur réseau si exchange (pas nécessaire)
+            var netValEl = document.getElementById('retraitNetworkValue');
+            if (isExchange && netValEl) netValEl.value = '';
 
             if (wName === 'Site Web' || wName === 'Trust Wallet') {
               // Address-based wallet: show address for current crypto
